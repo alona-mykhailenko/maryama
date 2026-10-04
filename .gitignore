@@ -23,6 +23,13 @@
 # misc
 .DS_Store
 *.pem
+*.log
+
+# editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
 # debug
 npm-debug.log*
@@ -41,4 +48,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# prisma
 /app/generated/prisma
+
+# supabase CLI local state
+supabase/.branches
+supabase/.temp
+
+# claude code: personal settings (shared .claude/settings.json stays tracked)
+.claude/settings.local.json
