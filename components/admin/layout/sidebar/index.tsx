@@ -26,9 +26,12 @@ export const Sidebar = ({ email }: SidebarProps) => {
   return (
     <VStack
       as="aside"
-      position="sticky"
+      position="fixed"
       top="0"
+      left="0"
+      w={ADMIN.sidebarWidth}
       h="100vh"
+      zIndex="10"
       align="stretch"
       gap="0"
       borderRight="1px solid"

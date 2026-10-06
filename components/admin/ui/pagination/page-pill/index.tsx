@@ -27,10 +27,8 @@ export const PagePill = ({
       justifyContent="center"
       cursor={disabled ? 'default' : 'pointer'}
       opacity={disabled ? 0.4 : 1}
-      bg={active ? COLORS.Bg.Inverted : COLORS.Bg.Default}
+      bg={active ? COLORS.Bg.Inverted : COLORS.Bg.Muted}
       color={active ? COLORS.Text.FgContrast : COLORS.Text.FgMuted}
-      border="1px solid"
-      borderColor={active ? COLORS.Border.Inverted : COLORS.Border.Default}
       onClick={disabled ? undefined : handleClick}
     >
       {label}

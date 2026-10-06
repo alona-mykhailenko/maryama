@@ -33,8 +33,7 @@ export const RoomPriceCard = ({ pricePerNight }: RoomPriceCardProps) => {
         px="15px"
         py="10px"
         borderRadius={ADMIN.pill}
-        border="1px solid"
-        borderColor={COLORS.Border.Default}
+        bg={COLORS.Bg.Muted}
         color={COLORS.Text.Fg}
         cursor="not-allowed"
         opacity={0.6}

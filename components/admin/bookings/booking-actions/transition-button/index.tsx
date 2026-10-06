@@ -26,13 +26,11 @@ export const TransitionButton = ({
       px="11px"
       py="6px"
       borderRadius={ADMIN.pill}
-      border="1px solid"
-      borderColor={COLORS.Border.Default}
       color={COLORS.Text.FgSecondary}
-      bg={COLORS.Bg.Default}
+      bg={COLORS.Bg.Muted}
       cursor={disabled ? 'default' : 'pointer'}
       opacity={disabled ? 0.5 : 1}
-      _hover={disabled ? undefined : { bg: COLORS.Bg.Muted }}
+      _hover={disabled ? undefined : { bg: COLORS.Bg.Emphasized }}
       onClick={handleClick}
     >
       {label}

@@ -22,7 +22,7 @@ export default function Login() {
     mutationFn: login,
     onSuccess: () => {
       setLoginError(null);
-      router.push('/admin/(protected)/dashboard');
+      router.push('/admin/(protected)/bookings');
     },
     onError: (error) => {
       setLoginError(

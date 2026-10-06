@@ -24,6 +24,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Back office: white ground (COLORS.Bg.Default) and no rubber-band overscroll, so the cream never shows. */
+html:has([data-admin-shell]),
+body:has([data-admin-shell]) {
+  background-color: #ffffff;
+}
+
+/* On html only: body is a non-scrolling scroll container (overflow-x: hidden), and
+   overscroll-behavior on it would stop wheel scrolls from reaching the page. */
+html:has([data-admin-shell]) {
+  overscroll-behavior-y: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
