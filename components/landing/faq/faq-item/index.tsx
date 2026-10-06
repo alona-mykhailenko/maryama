@@ -28,7 +28,7 @@ export const FaqItem = ({
       <HStack
         justify="space-between"
         gap="24px"
-        py="26px"
+        py="24px"
         cursor="pointer"
         userSelect="none"
         _hover={{ opacity: 0.6 }}
@@ -51,7 +51,7 @@ export const FaqItem = ({
         transition="grid-template-rows .5s cubic-bezier(.4, 0, .2, 1), opacity .4s ease"
       >
         <Box overflow="hidden" minH="0">
-          <Box pb="30px" maxW="52ch">
+          <Box pb="32px" maxW="52ch">
             <Text font={FONTS.T1.T14px.Light}>
               {answer}
             </Text>

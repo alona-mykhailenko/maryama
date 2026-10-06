@@ -48,8 +48,8 @@ export const Navbar = () => {
       zIndex={20}
       justify="space-between"
       gap="0"
-      px={{ base: "24px", md: "40px" }}
-      py="26px"
+      px={LANDING.gutter}
+      py="24px"
       bg={solid ? LANDING.cream : "transparent"}
       borderBottom="1px solid"
       borderColor={solid ? LANDING.hairline : "transparent"}

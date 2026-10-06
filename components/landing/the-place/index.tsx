@@ -3,6 +3,7 @@ import FONTS from "@/assets/fonts";
 import { Text } from "@/components/core/text";
 import { PLACE } from "../content";
 import { SplitSection } from "../split-section";
+import LANDING from "../tokens";
 
 /**
  * "01 — The Place": a narrow eyebrow + heading column beside a wider column of
@@ -12,8 +13,7 @@ export const ThePlace = () => {
   return (
     <SplitSection
       id="place"
-      pt="140px"
-      pb="40px"
+      pt={LANDING.space.section}
       label={PLACE.label}
       aside={
         <Box letterSpacing=".06em">
@@ -21,7 +21,7 @@ export const ThePlace = () => {
         </Box>
       }
     >
-      <VStack align="stretch" gap="26px" pt="6px">
+      <VStack align="stretch" gap={LANDING.space.stack} pt="6px">
         {PLACE.paragraphs.map((paragraph) => (
           <Box key={paragraph} maxW="52ch" letterSpacing=".02em">
             <Text font={FONTS.T1.T14px.Light}>{paragraph}</Text>

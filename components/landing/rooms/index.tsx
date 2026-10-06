@@ -6,6 +6,7 @@ import type { Room } from "@/services/types/room";
 import { ROOMS } from "../content";
 import { SectionContainer } from "../section-container";
 import { SectionLabel } from "../section-label";
+import LANDING from "../tokens";
 import { RoomCard } from "./room-card";
 
 export const Rooms = () => {
@@ -19,8 +20,8 @@ export const Rooms = () => {
   }, []);
 
   return (
-    <Box as="section" id="rooms" pt={{ base: "60px", md: "90px" }}>
-      <SectionContainer mb={{ base: "32px", md: "48px" }}>
+    <Box as="section" id="rooms" pt={LANDING.space.section}>
+      <SectionContainer mb={LANDING.space.label}>
         <SectionLabel>{ROOMS.label}</SectionLabel>
       </SectionContainer>
 

@@ -3,17 +3,17 @@ import FONTS from "@/assets/fonts";
 import { Text } from "@/components/core/text";
 import { FAQ } from "../content";
 import { SplitSection } from "../split-section";
+import LANDING from "../tokens";
 import { FaqList } from "./faq-list";
 
 export const Faq = () => {
   return (
     <SplitSection
       id="faq"
-      pt="100px"
-      pb="130px"
+      py={LANDING.space.section}
       label={FAQ.label}
       aside={
-        <VStack align="stretch" gap="26px">
+        <VStack align="stretch" gap={LANDING.space.stack}>
           <Box letterSpacing=".06em">
             <Text font={FONTS.T1.T34px.ExtraLight}>
               {FAQ.heading}

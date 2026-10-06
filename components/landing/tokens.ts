@@ -25,6 +25,27 @@ export const LANDING = {
   maxWidth: '1240px',
   /** Horizontal page gutter — flat 40px in the design, tightened on phones. */
   gutter: { base: '24px', md: '40px' } as const,
+
+  /**
+   * Vertical rhythm of the page. Every value sits on an 8px grid and shrinks
+   * on phones. Sections only pad their top with `section` (the last one before
+   * the footer pads its bottom too), so the gap between any two sections is
+   * always the same.
+   */
+  space: {
+    /** Between two unrelated sections. */
+    section: { base: '80px', md: '128px' },
+    /** Between a section and the block that continues it (story → gallery, footer grid → bottom bar). */
+    related: { base: '48px', md: '80px' },
+    /** Eyebrow label → the section's content. */
+    label: { base: '24px', md: '32px' },
+    /** Between the columns of a split or multi-column layout. */
+    columns: { base: '40px', md: '80px' },
+    /** Between photos in a gallery. */
+    gallery: { base: '16px', md: '24px' },
+    /** Between stacked paragraphs or small blocks. */
+    stack: '24px',
+  },
 } as const;
 
 export default LANDING;

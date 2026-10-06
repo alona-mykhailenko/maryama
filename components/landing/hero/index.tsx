@@ -46,7 +46,7 @@ export const Hero = () => {
         inset="0"
         justify="center"
         gap="0"
-        px="24px"
+        px={LANDING.gutter}
         textAlign="center"
         pointerEvents="none"
         background="linear-gradient(180deg, rgba(18,18,18,.22) 0%, rgba(18,18,18,0) 40%, rgba(18,18,18,.3) 100%)"
@@ -71,8 +71,8 @@ export const Hero = () => {
 
       <Box
         position="absolute"
-        bottom="28px"
-        left={{ base: "24px", md: "40px" }}
+        bottom={LANDING.gutter}
+        left={LANDING.gutter}
         letterSpacing=".3em"
         textTransform="uppercase"
         pointerEvents="none"

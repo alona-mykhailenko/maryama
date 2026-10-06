@@ -95,7 +95,8 @@ None for now. All copy is plain English in `components/landing/content.ts`. Do n
     - `Text`: `Fg` (`#221616`), `FgSecondary`, `FgMuted`, `FgSubtle`, `FgFaint`, `FgDisabled`, `FgInverted` (cream on dark), `FgContrast` (white on dark), `FgError`.
     - Palettes: `Earth` (`LightCream` → `DarkBrown`) and `Accent` (`Terracotta`, `Olive`, `Sage`, `LightRed`).
   - **Pick by role, not by hue**: a background uses `Bg.*`, a border `Border.*`, text `Text.*`. Reach for a palette colour only when no semantic token fits.
-  - `LANDING` from `@/components/landing/tokens` on the landing page: `cream` (page ground), `ink` (text, borders, dark sections), `hairline` / `hairlineOnDark` / `hairlineOnDarkStrong`, `maxWidth` (`1240px`) and `gutter`.
+  - `LANDING` from `@/components/landing/tokens` on the landing page: `cream` (page ground), `ink` (text, borders, dark sections), `hairline` / `hairlineOnDark` / `hairlineOnDarkStrong`, `maxWidth` (`1240px`), `gutter` and the `space` scale.
+- **Landing spacing** comes from `LANDING.space` (8px grid, responsive): `section` (80/128px) is the top padding of every section, plus the bottom of the last one before the footer; `related` (48/80px) is for a block that continues the previous one; `label` for eyebrow → content; `columns`, `gallery` and `stack` for gaps. Use `LANDING.gutter` for every horizontal page edge (navbar and hero included). Don't invent one-off section paddings.
 - The design is two-colour: cream ground + near-black ink brown. Use the palette/accent tones sparingly.
 - **Text on dark grounds**: landing (hero, room cards, footer) `color={COLORS.Text.FgInverted}`; back office (active nav, primary buttons, confirmed status) `COLORS.Text.FgContrast`.
 - Photo scrims/veils use `rgba(18, 18, 18, <alpha>)` gradients inline. That is the only accepted raw color value.

@@ -28,14 +28,14 @@ export const SiteFooter = () => {
       id="footer"
       bg={LANDING.ink}
       color={LANDING.cream}
-      pt="96px"
-      pb="40px"
+      pt={LANDING.space.section}
+      pb={LANDING.gutter}
     >
       <SectionContainer>
         <Grid
           templateColumns={{ base: '1fr', sm: '1fr 1fr', md: '1.4fr 1fr 1fr 1fr' }}
           gap={{ base: '40px', md: '56px' }}
-          pb="80px"
+          pb={LANDING.space.related}
         >
           <VStack align="stretch" gap="18px">
             <Box letterSpacing=".44em" textTransform="uppercase">
@@ -83,7 +83,7 @@ export const SiteFooter = () => {
         <HStack
           justify="space-between"
           gap="20px"
-          pt="28px"
+          pt="24px"
           borderTop="1px solid"
           borderColor={LANDING.hairlineOnDark}
           letterSpacing=".24em"

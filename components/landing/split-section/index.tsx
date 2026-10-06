@@ -1,6 +1,7 @@
 import { Grid } from "@chakra-ui/react";
 import { SectionContainer } from "../section-container";
 import { SectionLabel } from "../section-label";
+import LANDING from "../tokens";
 import type { SplitSectionProps } from "./props";
 
 /**
@@ -16,10 +17,10 @@ export const SplitSection = ({
 }: SplitSectionProps) => {
   return (
     <SectionContainer as="section" {...rest}>
-      <SectionLabel mb="34px">{label}</SectionLabel>
+      <SectionLabel mb={LANDING.space.label}>{label}</SectionLabel>
       <Grid
         templateColumns={{ base: "1fr", md: "1fr 1.35fr" }}
-        gap={{ base: "40px", md: "80px" }}
+        gap={LANDING.space.columns}
         alignItems="start"
       >
         {aside}
