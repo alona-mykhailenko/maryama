@@ -49,7 +49,7 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma
-/app/generated/prisma
+/src/generated/prisma
 
 # supabase CLI local state
 supabase/.branches
