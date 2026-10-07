@@ -60,6 +60,18 @@ export const ROOMS = {
   photoPlaceholder: (name: string) => `${name} — room photograph`,
 } as const;
 
+export const ROOM_DETAILS = {
+  back: "All rooms",
+  backHref: "/#rooms",
+  label: "The Room",
+  guestsLabel: "Guests",
+  rateLabel: "Rate",
+  checkInLabel: "Check-in",
+  checkIn: "From 3:00 PM",
+  book: "Book",
+  photoAlt: (name: string, index: number) => `${name} — photo ${index + 1}`,
+} as const;
+
 export const AVAILABILITY = {
   label: "03 — Availability",
   heading: "Choose your dates.",
