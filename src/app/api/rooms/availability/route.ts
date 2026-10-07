@@ -1,6 +1,6 @@
 import { type NextRequest } from "next/server";
 import { z } from "zod";
-import { BookingStatus } from "@/app/generated/prisma/enums";
+import { BookingStatus } from "@/generated/prisma/enums";
 import { MAX_STAY_NIGHTS } from "@/lib/dates";
 import prisma from "@/lib/prisma";
 

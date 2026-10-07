@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import { BookingStatus } from '@/app/generated/prisma/enums';
+import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/assets/colors';
 import FONTS from '@/assets/fonts';
 import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';

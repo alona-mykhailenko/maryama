@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BookingStatus } from "@/app/generated/prisma/enums";
+import { BookingStatus } from "@/generated/prisma/enums";
 import { getAdmin } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 

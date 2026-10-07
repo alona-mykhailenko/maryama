@@ -1,4 +1,4 @@
-import { BookingStatus } from '@/app/generated/prisma/enums';
+import { BookingStatus } from '@/generated/prisma/enums';
 
 export interface BookingTransition {
   label: string;
