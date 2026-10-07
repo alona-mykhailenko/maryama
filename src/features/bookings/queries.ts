@@ -1,4 +1,4 @@
-import type { Booking, BookingStatus } from "@/services/types/booking";
+import type { Booking, BookingStatus } from "@/features/bookings/types";
 
 export const bookingsQueryKey = ["bookings"] as const;
 

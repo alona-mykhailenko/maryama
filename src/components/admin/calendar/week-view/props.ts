@@ -1,4 +1,4 @@
-import type { Booking } from '@/services/types/booking';
+import type { Booking } from '@/features/bookings/types';
 import type { Room } from '@/services/types/room';
 
 export interface WeekViewProps {

@@ -7,8 +7,8 @@ import { useMemo, useState } from 'react';
 import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { BookingActions } from '@/components/admin/bookings/booking-actions';
-import { GuestCell } from '@/components/admin/bookings/guest-cell';
+import { BookingActions } from '@/features/bookings/components/booking-actions';
+import { GuestCell } from '@/features/bookings/components/guest-cell';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import { DataTable } from '@/components/admin/ui/data-table';
 import { Pagination } from '@/components/admin/ui/pagination';
@@ -17,11 +17,11 @@ import { SegmentedTabs } from '@/components/admin/ui/segmented-tabs';
 import type { SegmentedOption } from '@/components/admin/ui/segmented-toggle/props';
 import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
-import { bookingStatusTone } from '@/lib/booking-status';
+import { bookingStatusTone } from '@/features/bookings/status';
 import { formatShortDate, nightsBetween } from '@/lib/dates';
-import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/services/bookings';
+import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/features/bookings/queries';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
-import type { Booking } from '@/services/types/booking';
+import type { Booking } from '@/features/bookings/types';
 
 const PAGE_SIZE = 8;
 

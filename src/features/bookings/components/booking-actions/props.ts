@@ -1,4 +1,4 @@
-import type { BookingStatus } from '@/services/types/booking';
+import type { BookingStatus } from '@/features/bookings/types';
 
 export interface BookingActionsProps {
   bookingId: number;

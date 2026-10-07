@@ -1,4 +1,4 @@
-import type { Booking } from '@/services/types/booking';
+import type { Booking } from '@/features/bookings/types';
 
 export interface BookingChipProps {
   booking: Booking;

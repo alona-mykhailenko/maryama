@@ -1,5 +1,5 @@
 import { HStack } from '@chakra-ui/react';
-import { BOOKING_TRANSITIONS } from '@/lib/booking-transitions';
+import { BOOKING_TRANSITIONS } from '@/features/bookings/transitions';
 import type { BookingActionsProps } from './props';
 import { TransitionButton } from './transition-button';
 

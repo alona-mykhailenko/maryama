@@ -19,7 +19,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from '@/lib/dates';
-import { bookingsQueryKey, getBookings } from '@/services/bookings';
+import { bookingsQueryKey, getBookings } from '@/features/bookings/queries';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
 
 export default function CalendarPage() {

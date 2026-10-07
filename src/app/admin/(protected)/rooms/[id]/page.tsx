@@ -20,7 +20,7 @@ import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
 import { parseDay, startOfDay } from '@/lib/dates';
-import { bookingsQueryKey, getBookings } from '@/services/bookings';
+import { bookingsQueryKey, getBookings } from '@/features/bookings/queries';
 import { deleteRoomImage, uploadRoomImages } from '@/services/room-images';
 import { getRoom, roomQueryKey, roomsQueryKey } from '@/services/rooms';
 import type { RoomImage } from '@/services/types/room';
