@@ -8,7 +8,7 @@ import { ThePlace } from "@/features/landing/components/the-place";
 /**
  * Landing page inside the shared `PageShell` (navbar + footer): a full-viewport
  * `Hero`, the story + gallery of `ThePlace`, the `Rooms` list, and the
- * `Faq` accordion. All copy lives in `@/components/landing/content`.
+ * `Faq` accordion. All copy lives in `@/config/content`.
  */
 export default function Home() {
   return (
