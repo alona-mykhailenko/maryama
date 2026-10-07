@@ -1,5 +1,5 @@
-import type { Room } from "@/features/rooms/types";
+import type { RoomDetails } from "@/features/room-details/types";
 
 export interface RoomCardProps {
-  room: Room;
+  room: RoomDetails;
 }

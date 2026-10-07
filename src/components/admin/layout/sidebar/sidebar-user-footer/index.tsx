@@ -1,29 +1,12 @@
-'use client';
-
 import { Box, HStack, IconButton, VStack } from '@chakra-ui/react';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { LogOutIcon } from '@/components/admin/icons/log-out';
 import { Text } from '@/components/ui/text';
-import { logout } from '@/features/auth/queries';
 import type { SidebarUserFooterProps } from './props';
 
 /** Signed-in admin (initial + email) with the log-out button. */
-export const SidebarUserFooter = ({ email }: SidebarUserFooterProps) => {
-  const router = useRouter();
-
-  const mutation = useMutation({
-    mutationFn: logout,
-    onSettled: () => {
-      router.replace('/admin/login');
-      router.refresh();
-    },
-  });
-
-  const handleLogout = () => mutation.mutate();
-
+export const SidebarUserFooter = ({ email, isLoggingOut, onLogout }: SidebarUserFooterProps) => {
   return (
     <HStack pt="14px" px="18px" borderTop="1px solid" borderColor={COLORS.Border.Default} gap="11px">
       <Box
@@ -53,8 +36,8 @@ export const SidebarUserFooter = ({ email }: SidebarUserFooterProps) => {
         variant="ghost"
         size="xs"
         color={COLORS.Text.FgSubtle}
-        loading={mutation.isPending}
-        onClick={handleLogout}
+        loading={isLoggingOut}
+        onClick={onLogout}
         _hover={{ color: COLORS.Text.Fg, bg: 'transparent' }}
       >
         <LogOutIcon />

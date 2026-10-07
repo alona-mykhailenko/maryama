@@ -1,5 +1,4 @@
 import { Box, Grid, VStack } from "@chakra-ui/react";
-import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { AVAILABILITY, ROOM_DETAILS, ROOMS } from "@/config/content";
@@ -20,10 +19,11 @@ const toParagraphs = (description: string) =>
 
 /**
  * Top of a room page, below the solid navbar: the room's first photo in
- * portrait beside its name, description, key facts and the book button.
+ * portrait beside its name, description, key facts and the `reserve` slot
+ * (the page passes the reserve card).
  * The photo stacks above the text on phones.
  */
-export const RoomOverview = ({ room }: RoomOverviewProps) => {
+export const RoomOverview = ({ room, reserve }: RoomOverviewProps) => {
   return (
     <SectionContainer as="section" id="room" pt={{ base: "112px", md: "144px" }}>
       <BackLink />
@@ -61,25 +61,7 @@ export const RoomOverview = ({ room }: RoomOverviewProps) => {
             <RoomFact label={ROOM_DETAILS.rateLabel} value={AVAILABILITY.perNight(room.pricePerNight)} />
           </Box>
 
-          {/* Booking isn't wired up yet: the button does nothing for now. */}
-          <Box
-            asChild
-            alignSelf="start"
-            px="28px"
-            py="14px"
-            bg={LANDING.ink}
-            letterSpacing=".28em"
-            textTransform="uppercase"
-            cursor="pointer"
-            transition="opacity .2s ease"
-            _hover={{ opacity: 0.75 }}
-          >
-            <button type="button">
-              <Text font={FONTS.T1.T10px.Regular} color={COLORS.Text.FgInverted}>
-                {ROOM_DETAILS.book}
-              </Text>
-            </button>
-          </Box>
+          {reserve}
         </VStack>
       </Grid>
     </SectionContainer>

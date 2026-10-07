@@ -10,6 +10,7 @@ export interface Booking {
   checkOut: string;
   guestName: string;
   guestEmail: string;
+  guestPhone: string | null;
   guests: number;
   message: string | null;
   status: BookingStatus;

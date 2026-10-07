@@ -69,6 +69,21 @@ export const ROOM_DETAILS = {
   checkInLabel: "Check-in",
   checkIn: "From 3:00 PM",
   book: "Book",
+  bookHref: (id: number) => `/rooms/${id}/book`,
+  reserve: {
+    addDates: "Add dates for prices",
+    addDate: "Add date",
+    chooseDates: "Choose your dates",
+    breakdown: (nights: number, price: number) =>
+      `${nights === 1 ? "1 night" : `${nights} nights`} × €${price}`,
+    reserve: "Reserve",
+    changeDates: "Change dates",
+    checking: "Checking availability…",
+    unavailable: "This room is taken on some of these nights. Try other dates.",
+    note: "You won't be charged yet",
+    clear: "Clear dates",
+    close: "Close",
+  },
   photoAlt: (name: string, index: number) => `${name} — photo ${index + 1}`,
 } as const;
 
@@ -95,6 +110,36 @@ export const AVAILABILITY = {
   guests: (count: number) => (count === 1 ? "1 guest" : `Up to ${count} guests`),
   perNight: (price: number) => `€${price} / night`,
   total: (price: number) => `€${price} total`,
+} as const;
+
+export const BOOKING = {
+  pageTitle: (name: string) => `Book ${name}`,
+  back: "Back to the room",
+  backHref: (id: number) => `/rooms/${id}`,
+  label: "Your stay",
+  detailsLabel: "Your details",
+  nameLabel: "Full name",
+  emailLabel: "Email",
+  phoneLabel: "Phone (WhatsApp)",
+  messageLabel: "Message (optional)",
+  messagePlaceholder: "Arrival time, questions, anything we should know",
+  totalLabel: "Total",
+  guestCount: (count: number) => (count === 1 ? "1 guest" : `${count} guests`),
+  changeStay: "Change dates",
+  datesRequired: "Choose your check-in and check-out dates",
+  submit: "Request booking",
+  note: "Nothing is charged now. We'll confirm your stay by email.",
+  errors: {
+    dates_unavailable: "These dates are no longer free for this room. Please pick others.",
+    too_many_guests: "This room doesn't sleep that many guests.",
+    invalid_dates: "Please pick a check-in from today and a stay of at most 90 nights.",
+    generic: "We couldn't send your request right now. Please try again, or write to us on WhatsApp.",
+  },
+  successLabel: "Request received",
+  successTitle: "Thank you.",
+  successNote: (email: string) =>
+    `Your booking is pending. We'll check everything and confirm by email at ${email}, usually the same day.`,
+  successBack: "Back to the house",
 } as const;
 
 export const FAQ = {

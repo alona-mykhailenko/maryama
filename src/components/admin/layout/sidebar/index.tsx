@@ -20,7 +20,7 @@ const NAV_ITEMS = [
 ];
 
 /** Left column: wordmark, navigation and the signed-in admin. */
-export const Sidebar = ({ email }: SidebarProps) => {
+export const Sidebar = ({ email, isLoggingOut, onLogout }: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -62,7 +62,7 @@ export const Sidebar = ({ email }: SidebarProps) => {
         ))}
       </VStack>
 
-      <SidebarUserFooter email={email} />
+      <SidebarUserFooter email={email} isLoggingOut={isLoggingOut} onLogout={onLogout} />
     </VStack>
   );
 };

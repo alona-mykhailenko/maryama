@@ -19,8 +19,8 @@ import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/features/bookings/status';
 import { formatShortDate, nightsBetween } from '@/lib/dates';
-import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/features/bookings/queries';
-import { getRooms, roomsQueryKey } from '@/features/rooms/queries';
+import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/services/bookings';
+import { getRooms, roomsQueryKey } from '@/services/rooms';
 import type { Booking } from '@/features/bookings/types';
 
 const PAGE_SIZE = 8;
@@ -83,7 +83,11 @@ export default function BookingsPage() {
         id: 'guest',
         header: () => 'Guest',
         cell: (info) => (
-          <GuestCell name={info.row.original.guestName} email={info.row.original.guestEmail} />
+          <GuestCell
+            name={info.row.original.guestName}
+            email={info.row.original.guestEmail}
+            phone={info.row.original.guestPhone}
+          />
         ),
       }),
       columnHelper.display({

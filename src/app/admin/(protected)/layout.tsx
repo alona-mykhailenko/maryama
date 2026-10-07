@@ -1,9 +1,9 @@
-import { AppShell } from '@/components/admin/layout/app-shell';
 import { requireAdmin } from '@/lib/auth';
+import { AdminShell } from './admin-shell';
 
 /** Every page in this group requires a signed-in admin (the proxy also guards /admin/*). */
 export default async function AdminLayout({ children }: LayoutProps<'/admin'>) {
   const admin = await requireAdmin();
 
-  return <AppShell email={String(admin.email ?? '')}>{children}</AppShell>;
+  return <AdminShell email={String(admin.email ?? '')}>{children}</AdminShell>;
 }

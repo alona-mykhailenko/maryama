@@ -1,18 +1,13 @@
-"use client";
-
 import { Box, Grid } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
-import { getRooms, roomsQueryKey } from "@/features/rooms/queries";
 import { ROOMS } from "@/config/content";
 import { SectionContainer } from "@/components/landing/ui/section-container";
 import { SectionLabel } from "@/components/landing/ui/section-label";
 import LANDING from "@/theme/landing-tokens";
 import { RoomCard } from "./room-card";
+import type { RoomsProps } from "./props";
 
-export const Rooms = () => {
-  // Shared with the availability search, so the rooms are fetched once.
-  const { data: rooms = [] } = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
-
+/** Landing "Rooms" section: one full-height photo panel per room, loaded by the page. */
+export const Rooms = ({ rooms }: RoomsProps) => {
   return (
     <Box as="section" id="rooms" pt={LANDING.space.section}>
       <SectionContainer mb={LANDING.space.label}>

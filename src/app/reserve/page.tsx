@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Box } from "@chakra-ui/react";
-import { AvailabilityForm } from "@/features/availability/components/availability-form";
 import { RESERVE } from "@/config/content";
 import { PageShell } from "@/components/landing/layout/page-shell";
 import { SectionContainer } from "@/components/landing/ui/section-container";
 import LANDING from "@/theme/landing-tokens";
+import { ReserveSearch } from "./reserve-search";
 
 export const metadata: Metadata = {
   title: RESERVE.pageTitle,
@@ -19,7 +19,7 @@ export default function Reserve() {
     <PageShell showReserve={false}>
       <SectionContainer as="section" id="reserve" pt={{ base: "112px", md: "144px" }} pb={LANDING.space.section}>
         <Box maxW="960px" mx="auto">
-          <AvailabilityForm />
+          <ReserveSearch />
         </Box>
       </SectionContainer>
     </PageShell>

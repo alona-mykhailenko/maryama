@@ -4,14 +4,14 @@ import { Text } from "@/components/ui/text";
 import { AVAILABILITY } from "@/config/content";
 import { SplitSection } from "@/components/landing/ui/split-section";
 import LANDING from "@/theme/landing-tokens";
-import { AvailabilityForm } from "@/features/availability/components/availability-form";
 import type { AvailabilityProps } from "./props";
 
 /**
  * Landing "Availability" section: the heading and a short note on the left,
- * the `AvailabilityForm` (dates, guests, check button, results) on the right.
+ * `children` on the right (the page's `AvailabilityForm`: dates, guests,
+ * check button, results).
  */
-export const Availability = ({ id, label, pt, pb }: AvailabilityProps) => {
+export const Availability = ({ id, label, pt, pb, children }: AvailabilityProps) => {
   return (
     <SplitSection
       id={id}
@@ -29,7 +29,7 @@ export const Availability = ({ id, label, pt, pb }: AvailabilityProps) => {
         </VStack>
       }
     >
-      <AvailabilityForm />
+      {children}
     </SplitSection>
   );
 };

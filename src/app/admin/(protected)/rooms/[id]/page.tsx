@@ -20,9 +20,8 @@ import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
 import { parseDay, startOfDay } from '@/lib/dates';
-import { bookingsQueryKey, getBookings } from '@/features/bookings/queries';
-import { deleteRoomImage, uploadRoomImages } from '@/features/rooms/image-queries';
-import { getRoom, roomQueryKey, roomsQueryKey } from '@/features/rooms/queries';
+import { bookingsQueryKey, getBookings } from '@/services/bookings';
+import { deleteRoomImage, getRoom, roomQueryKey, roomsQueryKey, uploadRoomImages } from '@/services/rooms';
 import type { RoomImage } from '@/features/rooms/types';
 
 const UPCOMING_LIMIT = 5;

@@ -6,7 +6,7 @@ import { Sidebar } from '@/components/admin/layout/sidebar';
 import type { AppShellProps } from './props';
 
 /** Back-office frame: fixed sidebar beside the scrolling page. */
-export const AppShell = ({ email, children }: AppShellProps) => {
+export const AppShell = ({ email, isLoggingOut, onLogout, children }: AppShellProps) => {
   return (
     <Box
       className={sora.className}
@@ -15,7 +15,7 @@ export const AppShell = ({ email, children }: AppShellProps) => {
       bg={COLORS.Bg.Default}
       color={COLORS.Text.Fg}
     >
-      <Sidebar email={email} />
+      <Sidebar email={email} isLoggingOut={isLoggingOut} onLogout={onLogout} />
       <VStack align="stretch" gap="0" minW="0" minH="100vh" ml={ADMIN.sidebarWidth} bg={COLORS.Bg.Default}>
         {children}
       </VStack>

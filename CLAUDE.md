@@ -30,10 +30,11 @@ npx prisma db seed     # Seed rooms (prisma/seed.ts)
 
 ```
 src/
-├── app/                   # Routes only (pages, layouts, route handlers)
+├── app/                   # Routes only (pages, layouts, route handlers, and their colocated client halves that own API calls)
 │   ├── admin/             # Back office: login/ + (protected)/ (calendar, bookings, rooms, rooms/[id])
 │   ├── api/               # Route handlers (rooms, rooms/[id], rooms/availability, bookings, bookings/[id], auth/login, auth/logout)
 │   ├── reserve/           # Availability search page
+│   ├── rooms/[id]/        # Public room page + book/ (booking request form)
 │   ├── layout.tsx         # Root layout, wraps everything in the Chakra + React Query providers
 │   └── page.tsx           # Landing page
 ├── components/
@@ -41,13 +42,14 @@ src/
 │   ├── providers/         # Chakra provider + Emotion cache, React Query provider
 │   ├── admin/             # Back-office ui/ (DataTable, AdminButton, …), layout/ (app-shell, sidebar, page-header), icons/
 │   └── landing/           # Landing ui/ (image-slot, section-container, section-label, split-section), layout/ (navbar, site-footer, page-shell), icons/
-├── features/              # One folder per domain: components/ + queries.ts (fetchers + query keys), types.ts, …
-│   ├── auth/              # queries, types, schema (login zod schema)
-│   ├── availability/      # Availability search: calendar, form, date summary, room results
-│   ├── bookings/          # queries, types, status (status → colours), transitions (allowed status changes), components
+├── services/              # Every API / data call: auth.ts, bookings.ts, rooms.ts (fetchers + query keys), rooms-server.ts (server-only Prisma reads)
+├── features/              # One folder per domain: presentational components/ + types.ts, schema, rules, …
+│   ├── auth/              # types, schema (login zod schema)
+│   ├── availability/      # Availability search: calendar, form, date summary, room results, StayDates type
+│   ├── bookings/          # types, schema, status (status → colours), transitions (allowed status changes), components
 │   ├── calendar/          # Admin week/month calendar components + CalendarView type
 │   ├── landing/           # Landing sections (hero, the-place, place-gallery, rooms, faq)
-│   └── rooms/             # queries, image-queries, types, image-rules (accepted photo types/size), admin components
+│   └── rooms/             # types, image-rules (accepted photo types/size), admin components
 ├── config/content.ts      # All landing copy
 ├── theme/                 # colors (COLORS), fonts (Montserrat/Sora + FONTS), admin-tokens (ADMIN), landing-tokens (LANDING)
 ├── lib/
@@ -61,6 +63,8 @@ prisma/                    # schema.prisma, migrations, seed.ts
 public/images/             # Landing photos
 ```
 
+**Components are presentational ("stupid").** No component calls the API: no `fetch`, no `useQuery` / `useMutation`, no imports from `@/services`. They get data, loading/error state and callbacks through props (`onSubmit`, `isSubmitting`, `errorCode`, …) and keep only UI state (open popovers, the shown month, form fields). API calls happen in the route: client pages (admin) call React Query directly; a server `page.tsx` (public pages, which need `generateMetadata` and `notFound()`) loads data through `@/services/rooms-server` and hands interactive calls to a `'use client'` file next to it in the same route folder (`app/rooms/[id]/room-reserve.tsx`, `app/rooms/[id]/book/book-room-view.tsx`, `app/reserve/reserve-search.tsx`, `app/admin/(protected)/admin-shell.tsx`). A section that needs such a piece takes it as a slot prop (`RoomOverview reserve={…}`).
+
 Each component lives in its own folder as `index.tsx` (+ `props.ts` when it has a props interface). Sub-components get a sub-folder (e.g. `faq/faq-item/`). **Extract a separate component whenever a piece of UI is reusable or makes a section easier to read.**
 
 **No inline functions in JSX props.** Never write `onClick={() => …}`, `onChange={(value) => …}`, `getRowId={(row) => …}` etc. Declare a named handler in the component body (`const handleClose = () => onOpenChange(false);`) or a module-level helper when it uses no state (`const getRoomRowId = (room: Room) => String(room.id);`), then pass it by name: `onClick={handleClose}`. Pass an existing function directly when the signatures match (`onPageChange={setPage}`). Inside a `.map`, don't bind the item with an arrow: give the item component the value and have it call back with it (`<PagePill page={token} onClick={onPageChange} />`, where `PagePill` calls `onClick(page)` from its own `handleClick`). TanStack column definitions (`cell`, `header`) are config, not props, and are exempt.
@@ -70,9 +74,10 @@ Each component lives in its own folder as `index.tsx` (+ `props.ts` when it has 
 - **Database**: Prisma 7 with the `prisma-client` generator and `@prisma/adapter-pg`. Import the client from `@/lib/prisma`, never instantiate a new one. Config is in `prisma7.config.ts`.
 - **Models**: `Room`, `RoomImage`, `Booking` (see `prisma/schema.prisma`). Prices are whole euros.
 - **Public routes** (no auth): `GET /api/rooms` and `GET /api/rooms/[id]` return rooms with their images ordered by `position`. Never return booking/guest data from public routes.
+- **Booking requests**: `POST /api/bookings` is public (the `/rooms/[id]/book` form). It validates with `bookingRequestSchema` (`src/features/bookings/schema.ts`, shared with the form), checks capacity and overlaps in a serializable transaction (409 `dates_unavailable`), always creates the booking as `PENDING`, and returns only `{ id, status }`.
 - **Admin routes**: `GET /api/bookings`, `PATCH /api/bookings/[id]` (status), `POST /api/rooms/[id]/images` (multipart `files`), `DELETE /api/rooms/[id]/images/[imageId]`. Every admin route handler checks `getAdmin()` and returns 401 otherwise — the proxy only guards `/admin/*` pages, not `/api`.
 - **Room photos**: stored in the public Supabase Storage bucket `rooms-images` under `rooms/<roomId>/`, accessed only server-side through `createStorageClient()` (`src/lib/supabase/storage.ts`, secret key, call after `getAdmin()`). `RoomImage.url` holds the public URL; the object path is derived from it on delete. Accepted types/size limit live in `src/features/rooms/image-rules.ts`, shared by the API and the upload dialog.
-- **Client data**: fetchers + query keys live in each feature's `queries.ts` (`features/rooms`, `features/bookings`, `features/auth`), types in its `types.ts`. Pages call them through React Query (`useQuery` / `useMutation`). Enums come from `@/generated/prisma/enums` (safe to import client-side).
+- **Client data**: fetchers + query keys live in `src/services/` (`rooms.ts`, `bookings.ts`, `auth.ts`), types in each feature's `types.ts`. Only route files (pages and their colocated client files) call them, through React Query (`useQuery` / `useMutation`). Server pages read through `src/services/rooms-server.ts` (`server-only`, public fields only). Enums come from `@/generated/prisma/enums` (safe to import client-side).
 - **Admin auth**: Supabase Auth via `@supabase/ssr`, httpOnly cookies only (there is no browser Supabase client). `src/proxy.ts` refreshes the session and redirects unauthenticated `/admin/*` requests to `/admin/login`. In server code use `requireAdmin()` from `@/lib/auth`.
 
 ### Localization
@@ -134,7 +139,7 @@ None for now. All copy is plain English in `src/config/content.ts`. Do not add n
 - **`SplitSection`**: `SectionContainer` + eyebrow `label` over a `1fr 1.35fr` grid (heading in `aside`, body as `children`).
 - **`SectionLabel`**: tracked uppercase eyebrow ("01 — The Place").
 - **`Navbar`**: fixed header, transparent over the `#top` hero, solid cream once it scrolls past.
-- **`Rooms` / `RoomCard`**: client component fetching `/api/rooms`, one full-height panel per room.
+- **`Rooms` / `RoomCard`**: one full-height panel per room; the landing page loads the rooms on the server and passes them in.
 
 ## Environment Variables
 

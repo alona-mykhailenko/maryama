@@ -21,6 +21,7 @@ export const DateSummary = ({
   checkIn,
   checkOut,
   guests,
+  maxGuests,
   onGuestsChange,
 }: DateSummaryProps) => {
   const nights = checkIn && checkOut ? diffInDays(checkIn, checkOut) : null;
@@ -42,7 +43,7 @@ export const DateSummary = ({
         </Box>
       </SummaryField>
       <SummaryField label={AVAILABILITY.guestsLabel}>
-        <GuestsSelect value={guests} onChange={onGuestsChange} />
+        <GuestsSelect value={guests} max={maxGuests} onChange={onGuestsChange} />
       </SummaryField>
       <SummaryField label={AVAILABILITY.stayLabel}>
         <Box opacity={nights !== null ? 1 : 0.45}>

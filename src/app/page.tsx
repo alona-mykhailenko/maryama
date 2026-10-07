@@ -4,19 +4,23 @@ import { PageShell } from "@/components/landing/layout/page-shell";
 import { PlaceGallery } from "@/features/landing/components/place-gallery";
 import { Rooms } from "@/features/landing/components/rooms";
 import { ThePlace } from "@/features/landing/components/the-place";
+import { getPublicRooms } from "@/services/rooms-server";
 
 /**
  * Landing page inside the shared `PageShell` (navbar + footer): a full-viewport
- * `Hero`, the story + gallery of `ThePlace`, the `Rooms` list, and the
+ * `Hero`, the story + gallery of `ThePlace`, the `Rooms` list (loaded here,
+ * on the server), and the
  * `Faq` accordion. All copy lives in `@/config/content`.
  */
-export default function Home() {
+export default async function Home() {
+  const rooms = await getPublicRooms();
+
   return (
     <PageShell>
       <Hero />
       <ThePlace />
       <PlaceGallery />
-      <Rooms />
+      <Rooms rooms={rooms} />
       <Faq />
     </PageShell>
   );

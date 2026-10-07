@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { createListCollection, Select, type SelectValueChangeDetails } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
@@ -10,17 +11,22 @@ import type { GuestsSelectProps } from "./props";
 /** Most guests a stay can be searched for (the largest room sleeps five). */
 const MAX_GUESTS = 5;
 
-const GUESTS_COLLECTION = createListCollection({
-  items: Array.from({ length: MAX_GUESTS }, (_, index) => String(index + 1)),
-});
+const createGuestsCollection = (max: number) =>
+  createListCollection({ items: Array.from({ length: max }, (_, index) => String(index + 1)) });
+
+const GUESTS_COLLECTION = createGuestsCollection(MAX_GUESTS);
 
 /**
- * Guest count dropdown (1–5): Chakra's `Select` for keyboard and screen-reader
+ * Guest count dropdown (1–5, or up to `max` for one room): Chakra's `Select` for keyboard and screen-reader
  * support, restyled as a bare number with a flipping chevron. No portal, so the
  * list keeps the page's Montserrat.
  */
-export const GuestsSelect = ({ value, onChange }: GuestsSelectProps) => {
+export const GuestsSelect = ({ value, max, onChange }: GuestsSelectProps) => {
   const selected = String(value);
+  const collection = useMemo(
+    () => (max ? createGuestsCollection(max) : GUESTS_COLLECTION),
+    [max],
+  );
 
   const handleValueChange = ({ value: [next] }: SelectValueChangeDetails) => {
     if (next) onChange(Number(next));
@@ -29,7 +35,7 @@ export const GuestsSelect = ({ value, onChange }: GuestsSelectProps) => {
   return (
     <Select.Root
       unstyled
-      collection={GUESTS_COLLECTION}
+      collection={collection}
       value={[selected]}
       positioning={{ placement: "bottom-start", gutter: 8 }}
       onValueChange={handleValueChange}
@@ -66,7 +72,7 @@ export const GuestsSelect = ({ value, onChange }: GuestsSelectProps) => {
           boxShadow="0 12px 32px rgba(18, 18, 18, 0.08)"
           outline="none"
         >
-          {GUESTS_COLLECTION.items.map((guests) => (
+          {collection.items.map((guests) => (
             <Select.Item
               key={guests}
               item={guests}
