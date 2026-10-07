@@ -1,9 +1,9 @@
-import { Faq } from "@/components/landing/faq";
-import { Hero } from "@/components/landing/hero";
+import { Faq } from "@/features/landing/components/faq";
+import { Hero } from "@/features/landing/components/hero";
 import { PageShell } from "@/components/landing/layout/page-shell";
-import { PlaceGallery } from "@/components/landing/place-gallery";
-import { Rooms } from "@/components/landing/rooms";
-import { ThePlace } from "@/components/landing/the-place";
+import { PlaceGallery } from "@/features/landing/components/place-gallery";
+import { Rooms } from "@/features/landing/components/rooms";
+import { ThePlace } from "@/features/landing/components/the-place";
 
 /**
  * Landing page inside the shared `PageShell` (navbar + footer): a full-viewport
