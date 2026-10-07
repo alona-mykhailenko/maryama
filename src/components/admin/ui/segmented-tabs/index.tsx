@@ -1,6 +1,6 @@
 import { HStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import ADMIN from '../../tokens';
+import COLORS from '@/theme/colors';
+import ADMIN from '@/theme/admin-tokens';
 import type { SegmentedTabsProps } from './props';
 import { TabOption } from './tab-option';
 

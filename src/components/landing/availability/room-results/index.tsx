@@ -1,8 +1,8 @@
 import { Box, VStack } from "@chakra-ui/react";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { AVAILABILITY } from "../../content";
+import { AVAILABILITY } from "@/components/landing/content";
 import { AvailableRoom } from "./available-room";
 import type { AvailabilityState, RoomResultsProps } from "./props";
 

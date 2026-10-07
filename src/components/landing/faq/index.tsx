@@ -1,9 +1,9 @@
 import { Box, VStack } from "@chakra-ui/react";
-import FONTS from "@/assets/fonts";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { FAQ } from "../content";
-import { SplitSection } from "../split-section";
-import LANDING from "../tokens";
+import { FAQ } from "@/components/landing/content";
+import { SplitSection } from "@/components/landing/split-section";
+import LANDING from "@/theme/landing-tokens";
 import { FaqList } from "./faq-list";
 
 export const Faq = () => {

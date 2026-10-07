@@ -1,11 +1,11 @@
 'use client';
 
 import { VStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import { AdminButton } from '../admin-button';
-import { AdminDialog } from '../admin-dialog';
+import { AdminButton } from '@/components/admin/ui/admin-button';
+import { AdminDialog } from '@/components/admin/ui/admin-dialog';
 import type { ConfirmDialogProps } from './props';
 
 /** "Are you sure?" window for destructive actions: Cancel + a red confirm button. */

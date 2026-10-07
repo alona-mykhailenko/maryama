@@ -1,5 +1,5 @@
 import { Text as ChakraText } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 import type { TextProps } from './props';
 
 export const Text = ({

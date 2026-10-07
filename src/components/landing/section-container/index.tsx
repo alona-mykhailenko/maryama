@@ -1,5 +1,5 @@
 import { Box, type BoxProps } from '@chakra-ui/react';
-import LANDING from '../tokens';
+import LANDING from '@/theme/landing-tokens';
 
 /**
  * The centred page-width column every landing section sits in: capped at

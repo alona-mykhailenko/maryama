@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 import { PlusIcon } from '@/components/admin/icons/plus';
-import ADMIN from '../../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { AddImageTileProps } from './props';
 
 /** Dashed "+" tile after the last photo; opens the upload window. */

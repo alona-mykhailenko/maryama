@@ -1,5 +1,5 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import LANDING from "../tokens";
+import LANDING from "@/theme/landing-tokens";
 import type { ImageSlotProps } from "./props";
 
 /**

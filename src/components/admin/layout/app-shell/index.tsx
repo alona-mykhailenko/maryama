@@ -1,8 +1,8 @@
 import { Box, VStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import { sora } from '@/assets/fonts';
-import ADMIN from '../../tokens';
-import { Sidebar } from '../sidebar';
+import COLORS from '@/theme/colors';
+import { sora } from '@/theme/fonts';
+import ADMIN from '@/theme/admin-tokens';
+import { Sidebar } from '@/components/admin/layout/sidebar';
 import type { AppShellProps } from './props';
 
 /** Back-office frame: fixed sidebar beside the scrolling page. */

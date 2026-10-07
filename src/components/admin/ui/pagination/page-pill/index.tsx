@@ -1,7 +1,7 @@
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { PagePillProps } from './props';
 
 /** One round page button; filled ink when active. */

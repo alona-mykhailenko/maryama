@@ -1,4 +1,4 @@
-import type { CalendarView } from '../types';
+import type { CalendarView } from '@/components/admin/calendar/types';
 
 export interface CalendarToolbarProps {
   rangeLabel: string;

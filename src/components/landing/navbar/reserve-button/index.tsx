@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import NextLink from "next/link";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { RESERVE } from "../../content";
-import LANDING from "../../tokens";
+import { RESERVE } from "@/components/landing/content";
+import LANDING from "@/theme/landing-tokens";
 import type { ReserveButtonProps } from "./props";
 
 /**

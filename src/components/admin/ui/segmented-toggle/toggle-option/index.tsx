@@ -1,5 +1,5 @@
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import type { ToggleOptionProps } from './props';
 

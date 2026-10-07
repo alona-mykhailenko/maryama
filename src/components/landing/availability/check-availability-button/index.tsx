@@ -1,9 +1,9 @@
 import { chakra } from "@chakra-ui/react";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { AVAILABILITY } from "../../content";
-import LANDING from "../../tokens";
+import { AVAILABILITY } from "@/components/landing/content";
+import LANDING from "@/theme/landing-tokens";
 import type { CheckAvailabilityButtonProps } from "./props";
 
 /** Ink "Check availability" button, as wide as the stay summary above it. */

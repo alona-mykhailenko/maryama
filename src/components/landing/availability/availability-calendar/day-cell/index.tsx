@@ -1,9 +1,9 @@
 import { Box, chakra } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import { formatDayNum } from '@/lib/dates';
-import LANDING from '../../../tokens';
+import LANDING from '@/theme/landing-tokens';
 import type { DayCellProps } from './props';
 
 const DAY_HEIGHT = { base: '40px', md: '44px' };

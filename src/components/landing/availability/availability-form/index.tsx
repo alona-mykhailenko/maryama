@@ -10,12 +10,12 @@ import {
   roomAvailabilityQueryKey,
   roomsQueryKey,
 } from "@/services/rooms";
-import LANDING from "../../tokens";
-import { AvailabilityCalendar } from "../availability-calendar";
-import { CheckAvailabilityButton } from "../check-availability-button";
-import { DateSummary } from "../date-summary";
-import { RoomResults } from "../room-results";
-import type { AvailabilityState } from "../room-results/props";
+import LANDING from "@/theme/landing-tokens";
+import { AvailabilityCalendar } from "@/components/landing/availability/availability-calendar";
+import { CheckAvailabilityButton } from "@/components/landing/availability/check-availability-button";
+import { DateSummary } from "@/components/landing/availability/date-summary";
+import { RoomResults } from "@/components/landing/availability/room-results";
+import type { AvailabilityState } from "@/components/landing/availability/room-results/props";
 
 const DEFAULT_GUESTS = 2;
 

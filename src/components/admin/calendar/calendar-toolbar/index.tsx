@@ -1,13 +1,13 @@
 import { HStack, IconButton } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { CalendarIcon } from '@/components/admin/icons/calendar';
 import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';
 import { ChevronRightIcon } from '@/components/admin/icons/chevron-right';
 import { SegmentedToggle } from '@/components/admin/ui/segmented-toggle';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
-import type { CalendarView } from '../types';
+import ADMIN from '@/theme/admin-tokens';
+import type { CalendarView } from '@/components/admin/calendar/types';
 import type { CalendarToolbarProps } from './props';
 
 const VIEW_OPTIONS: { value: CalendarView; label: string }[] = [

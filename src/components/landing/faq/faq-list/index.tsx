@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { VStack } from "@chakra-ui/react";
-import { FaqItem } from "../faq-item";
+import { FaqItem } from "@/components/landing/faq/faq-item";
 
 interface FaqListProps {
   items: readonly { question: string; answer: string }[];

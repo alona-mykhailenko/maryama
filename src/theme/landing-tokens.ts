@@ -1,4 +1,4 @@
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 
 /**
  * Exact visual constants for the Maryama landing design.

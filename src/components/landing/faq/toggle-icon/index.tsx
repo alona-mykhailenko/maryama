@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import LANDING from '../../tokens';
+import LANDING from '@/theme/landing-tokens';
 
 /**
  * The small plus mark beside each FAQ question. Rotates 45° to read as a close

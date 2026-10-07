@@ -2,8 +2,8 @@
 
 import { Grid, VStack } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { AdminButton } from '@/components/admin/ui/admin-button';
 import { AdminDialog } from '@/components/admin/ui/admin-dialog';
 import { Text } from '@/components/core/text';

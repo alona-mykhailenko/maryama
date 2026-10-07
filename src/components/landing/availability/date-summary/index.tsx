@@ -1,8 +1,8 @@
 import { Box, Grid } from "@chakra-ui/react";
-import FONTS from "@/assets/fonts";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
 import { diffInDays } from "@/lib/dates";
-import { AVAILABILITY } from "../../content";
+import { AVAILABILITY } from "@/components/landing/content";
 import { GuestsSelect } from "./guests-select";
 import type { DateSummaryProps } from "./props";
 import { SummaryField } from "./summary-field";

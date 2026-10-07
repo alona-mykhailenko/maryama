@@ -1,6 +1,6 @@
 import { Box, Field, Input } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import type { TextInputProps } from './props';
 

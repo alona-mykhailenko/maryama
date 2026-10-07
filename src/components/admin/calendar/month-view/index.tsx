@@ -1,9 +1,9 @@
 import { Box, Grid, VStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import { addDays, monthGridStart, overlapsDay, parseDay, WEEKDAY_LABELS } from '@/lib/dates';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import { BookingChip } from './booking-chip';
 import type { MonthViewProps } from './props';
 

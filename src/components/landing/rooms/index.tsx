@@ -3,10 +3,10 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { getRooms, roomsQueryKey } from "@/services/rooms";
-import { ROOMS } from "../content";
-import { SectionContainer } from "../section-container";
-import { SectionLabel } from "../section-label";
-import LANDING from "../tokens";
+import { ROOMS } from "@/components/landing/content";
+import { SectionContainer } from "@/components/landing/section-container";
+import { SectionLabel } from "@/components/landing/section-label";
+import LANDING from "@/theme/landing-tokens";
 import { RoomCard } from "./room-card";
 
 export const Rooms = () => {

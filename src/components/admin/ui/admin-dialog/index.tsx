@@ -1,11 +1,11 @@
 'use client';
 
 import { Dialog, type DialogOpenChangeDetails, HStack, IconButton, Portal } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS, { sora } from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS, { sora } from '@/theme/fonts';
 import { XIcon } from '@/components/admin/icons/x';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { AdminDialogProps } from './props';
 
 /** Centred back-office modal: title + close cross, body, and a footer of actions. */

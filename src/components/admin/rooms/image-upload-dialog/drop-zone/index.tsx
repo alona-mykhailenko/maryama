@@ -2,12 +2,12 @@
 
 import { chakra, VStack } from '@chakra-ui/react';
 import { type ChangeEvent, type DragEvent, useState } from 'react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { UploadIcon } from '@/components/admin/icons/upload';
 import { Text } from '@/components/core/text';
 import { ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/lib/room-images';
-import ADMIN from '../../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { DropZoneProps } from './props';
 
 /** Dashed area that opens the file picker on click and accepts dropped files. */

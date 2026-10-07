@@ -1,8 +1,8 @@
 import { HStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { PageHeaderProps } from './props';
 
 /** Top bar of every admin page, aligned with the sidebar's brand row. */

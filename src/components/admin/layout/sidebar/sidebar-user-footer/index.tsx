@@ -3,8 +3,8 @@
 import { Box, HStack, IconButton, VStack } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { LogOutIcon } from '@/components/admin/icons/log-out';
 import { Text } from '@/components/core/text';
 import { logout } from '@/services/auth';

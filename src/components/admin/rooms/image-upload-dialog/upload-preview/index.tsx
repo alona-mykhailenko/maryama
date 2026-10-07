@@ -1,5 +1,5 @@
 import { Box, IconButton, Image } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 import { XIcon } from '@/components/admin/icons/x';
 import type { UploadPreviewProps } from './props';
 

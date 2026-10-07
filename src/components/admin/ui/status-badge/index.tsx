@@ -1,7 +1,7 @@
 import { Box, HStack } from '@chakra-ui/react';
-import FONTS from '@/assets/fonts';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { StatusBadgeProps } from './props';
 
 /** Pill with a status dot, coloured by the booking status tone. */

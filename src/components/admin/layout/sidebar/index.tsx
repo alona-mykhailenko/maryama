@@ -2,13 +2,13 @@
 
 import { HStack, VStack } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { BedIcon } from '@/components/admin/icons/bed';
 import { CalendarIcon } from '@/components/admin/icons/calendar';
 import { ClipboardIcon } from '@/components/admin/icons/clipboard';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { SidebarProps } from './props';
 import { SidebarNavItem } from './sidebar-nav-item';
 import { SidebarUserFooter } from './sidebar-user-footer';

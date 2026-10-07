@@ -1,9 +1,9 @@
 import { Box, HStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { PencilIcon } from '@/components/admin/icons/pencil';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { RoomPriceCardProps } from './props';
 
 /** Nightly price card; the edit button is a disabled placeholder for now. */

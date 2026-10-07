@@ -1,10 +1,10 @@
 import { Box, VStack } from "@chakra-ui/react";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { HERO } from "../content";
-import { ImageSlot } from "../image-slot";
-import LANDING from "../tokens";
+import { HERO } from "@/components/landing/content";
+import { ImageSlot } from "@/components/landing/image-slot";
+import LANDING from "@/theme/landing-tokens";
 
 /**
  * Full-viewport opening section: hero photograph, a dark top-to-bottom

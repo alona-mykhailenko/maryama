@@ -1,4 +1,4 @@
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 import { BookingStatus } from '@/generated/prisma/enums';
 
 export interface StatusTone {

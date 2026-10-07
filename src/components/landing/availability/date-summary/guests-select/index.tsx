@@ -1,10 +1,10 @@
 import { createListCollection, Select, type SelectValueChangeDetails } from "@chakra-ui/react";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { AVAILABILITY } from "../../../content";
-import { ChevronDownIcon } from "../../../icons/chevron-down";
-import LANDING from "../../../tokens";
+import { AVAILABILITY } from "@/components/landing/content";
+import { ChevronDownIcon } from "@/components/landing/icons/chevron-down";
+import LANDING from "@/theme/landing-tokens";
 import type { GuestsSelectProps } from "./props";
 
 /** Most guests a stay can be searched for (the largest room sleeps five). */

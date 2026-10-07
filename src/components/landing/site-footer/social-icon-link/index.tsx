@@ -1,6 +1,6 @@
 import { Link } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
-import LANDING from '../../tokens';
+import LANDING from '@/theme/landing-tokens';
 
 /**
  * A 44px square outlined icon button. The outline brightens to full cream on

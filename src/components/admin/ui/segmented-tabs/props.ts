@@ -1,4 +1,4 @@
-import type { SegmentedOption } from '../segmented-toggle/props';
+import type { SegmentedOption } from '@/components/admin/ui/segmented-toggle/props';
 
 export interface SegmentedTabsProps<T extends string> {
   options: SegmentedOption<T>[];

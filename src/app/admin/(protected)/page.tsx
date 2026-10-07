@@ -9,7 +9,7 @@ import { MonthView } from '@/components/admin/calendar/month-view';
 import type { CalendarView } from '@/components/admin/calendar/types';
 import { WeekView } from '@/components/admin/calendar/week-view';
 import { PageHeader } from '@/components/admin/layout/page-header';
-import ADMIN from '@/components/admin/tokens';
+import ADMIN from '@/theme/admin-tokens';
 import { QueryState } from '@/components/admin/ui/query-state';
 import {
   addDays,

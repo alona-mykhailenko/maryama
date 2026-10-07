@@ -1,9 +1,9 @@
 import { Box, HStack, VStack } from "@chakra-ui/react";
-import COLORS from "@/assets/colors";
-import FONTS from "@/assets/fonts";
+import COLORS from "@/theme/colors";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { AVAILABILITY, ROOMS } from "../../../content";
-import { ImageSlot } from "../../../image-slot";
+import { AVAILABILITY, ROOMS } from "@/components/landing/content";
+import { ImageSlot } from "@/components/landing/image-slot";
 import type { AvailableRoomProps } from "./props";
 
 /**

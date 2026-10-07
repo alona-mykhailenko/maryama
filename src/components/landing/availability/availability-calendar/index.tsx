@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Box, chakra, Grid, HStack, VStack } from "@chakra-ui/react";
-import FONTS from "@/assets/fonts";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
 import {
   addDays,
@@ -14,10 +14,10 @@ import {
   startOfMonth,
   WEEKDAY_LABELS,
 } from "@/lib/dates";
-import { AVAILABILITY } from "../../content";
-import { ChevronLeftIcon } from "../../icons/chevron-left";
-import { ChevronRightIcon } from "../../icons/chevron-right";
-import LANDING from "../../tokens";
+import { AVAILABILITY } from "@/components/landing/content";
+import { ChevronLeftIcon } from "@/components/landing/icons/chevron-left";
+import { ChevronRightIcon } from "@/components/landing/icons/chevron-right";
+import LANDING from "@/theme/landing-tokens";
 import { DayCell } from "./day-cell";
 import type { AvailabilityCalendarProps } from "./props";
 

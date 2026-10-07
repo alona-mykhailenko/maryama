@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { QueryStateProps } from './props';
 
 /** "Loading…" / load-error line shown while a page's data is not ready. */

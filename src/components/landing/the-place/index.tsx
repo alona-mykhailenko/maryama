@@ -1,9 +1,9 @@
 import { Box, VStack } from "@chakra-ui/react";
-import FONTS from "@/assets/fonts";
+import FONTS from "@/theme/fonts";
 import { Text } from "@/components/core/text";
-import { PLACE } from "../content";
-import { SplitSection } from "../split-section";
-import LANDING from "../tokens";
+import { PLACE } from "@/components/landing/content";
+import { SplitSection } from "@/components/landing/split-section";
+import LANDING from "@/theme/landing-tokens";
 
 /**
  * "01 — The Place": a narrow eyebrow + heading column beside a wider column of

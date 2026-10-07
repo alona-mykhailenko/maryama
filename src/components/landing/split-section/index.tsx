@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react";
-import { SectionContainer } from "../section-container";
-import { SectionLabel } from "../section-label";
-import LANDING from "../tokens";
+import { SectionContainer } from "@/components/landing/section-container";
+import { SectionLabel } from "@/components/landing/section-label";
+import LANDING from "@/theme/landing-tokens";
 import type { SplitSectionProps } from "./props";
 
 /**

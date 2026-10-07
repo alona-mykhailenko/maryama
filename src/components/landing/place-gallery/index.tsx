@@ -1,8 +1,8 @@
 import { Box, Grid } from "@chakra-ui/react";
-import { PLACE_GALLERY } from "../content";
-import { ImageSlot } from "../image-slot";
-import { SectionContainer } from "../section-container";
-import LANDING from "../tokens";
+import { PLACE_GALLERY } from "@/components/landing/content";
+import { ImageSlot } from "@/components/landing/image-slot";
+import { SectionContainer } from "@/components/landing/section-container";
+import LANDING from "@/theme/landing-tokens";
 
 /**
  * The portrait triptych under "The Place": three vertical photos side by side,

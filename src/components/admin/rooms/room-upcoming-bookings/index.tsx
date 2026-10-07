@@ -1,9 +1,9 @@
 import { Box, HStack, VStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import { formatShortDate } from '@/lib/dates';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { RoomUpcomingBookingsProps } from './props';
 
 /** Card listing the room's next stays: guest name and dates. */

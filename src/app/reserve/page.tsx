@@ -4,7 +4,7 @@ import { AvailabilityForm } from "@/components/landing/availability/availability
 import { RESERVE } from "@/components/landing/content";
 import { PageShell } from "@/components/landing/page-shell";
 import { SectionContainer } from "@/components/landing/section-container";
-import LANDING from "@/components/landing/tokens";
+import LANDING from "@/theme/landing-tokens";
 
 export const metadata: Metadata = {
   title: RESERVE.pageTitle,

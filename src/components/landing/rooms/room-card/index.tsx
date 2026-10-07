@@ -1,10 +1,10 @@
 import { Box, Link } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
-import { ROOMS } from '../../content';
-import { ImageSlot } from '../../image-slot';
-import LANDING from '../../tokens';
+import { ROOMS } from '@/components/landing/content';
+import { ImageSlot } from '@/components/landing/image-slot';
+import LANDING from '@/theme/landing-tokens';
 import type { RoomCardProps } from './props';
 
 /**

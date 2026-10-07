@@ -1,5 +1,5 @@
 import { Box, type BoxProps } from '@chakra-ui/react';
-import FONTS from '@/assets/fonts';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 
 /**

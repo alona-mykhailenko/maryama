@@ -1,9 +1,9 @@
 import { Box, Grid } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
-import FONTS from '@/assets/fonts';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import { addDays, diffInDays, formatDayNum, formatDow, parseDay } from '@/lib/dates';
-import ADMIN from '../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import { BookingBar } from './booking-bar';
 import type { WeekViewProps } from './props';
 

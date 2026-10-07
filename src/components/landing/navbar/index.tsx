@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { HStack, Link } from "@chakra-ui/react";
-import { NAV_LINKS } from "../content";
-import LANDING from "../tokens";
+import { NAV_LINKS } from "@/components/landing/content";
+import LANDING from "@/theme/landing-tokens";
 import type { NavbarProps } from "./props";
 import { ReserveBar } from "./reserve-bar";
 import { ReserveButton } from "./reserve-button";

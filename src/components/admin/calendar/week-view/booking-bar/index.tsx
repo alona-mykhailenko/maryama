@@ -1,8 +1,8 @@
 import { VStack } from '@chakra-ui/react';
-import FONTS from '@/assets/fonts';
+import FONTS from '@/theme/fonts';
 import { Text } from '@/components/core/text';
 import { bookingStatusTone } from '@/lib/booking-status';
-import ADMIN from '../../../tokens';
+import ADMIN from '@/theme/admin-tokens';
 import type { BookingBarProps } from './props';
 
 /** A stay drawn across the room's row: guest name over the status. */

@@ -1,5 +1,5 @@
 import { HStack } from '@chakra-ui/react';
-import COLORS from '@/assets/colors';
+import COLORS from '@/theme/colors';
 import type { SegmentedToggleProps } from './props';
 import { ToggleOption } from './toggle-option';
 

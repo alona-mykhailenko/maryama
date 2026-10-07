@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from '@chakra-ui/react';
-import LANDING from '../../tokens';
+import LANDING from '@/theme/landing-tokens';
 
 /**
  * A plain cream text link in the footer (phone, email). Fades on hover.
