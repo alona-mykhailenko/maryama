@@ -4,7 +4,7 @@ import { Text } from "@/components/ui/text";
 import { AVAILABILITY } from "@/components/landing/content";
 import { SplitSection } from "@/components/landing/ui/split-section";
 import LANDING from "@/theme/landing-tokens";
-import { AvailabilityForm } from "./availability-form";
+import { AvailabilityForm } from "@/features/availability/components/availability-form";
 import type { AvailabilityProps } from "./props";
 
 /**

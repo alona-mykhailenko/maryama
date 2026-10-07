@@ -11,11 +11,11 @@ import {
   roomsQueryKey,
 } from "@/features/rooms/queries";
 import LANDING from "@/theme/landing-tokens";
-import { AvailabilityCalendar } from "@/components/landing/availability/availability-calendar";
-import { CheckAvailabilityButton } from "@/components/landing/availability/check-availability-button";
-import { DateSummary } from "@/components/landing/availability/date-summary";
-import { RoomResults } from "@/components/landing/availability/room-results";
-import type { AvailabilityState } from "@/components/landing/availability/room-results/props";
+import { AvailabilityCalendar } from "@/features/availability/components/availability-calendar";
+import { CheckAvailabilityButton } from "@/features/availability/components/check-availability-button";
+import { DateSummary } from "@/features/availability/components/date-summary";
+import { RoomResults } from "@/features/availability/components/room-results";
+import type { AvailabilityState } from "@/features/availability/components/room-results/props";
 
 const DEFAULT_GUESTS = 2;
 
