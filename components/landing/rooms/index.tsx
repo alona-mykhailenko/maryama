@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Box, Grid } from "@chakra-ui/react";
-import type { Room } from "@/services/types/room";
+import { useQuery } from "@tanstack/react-query";
+import { getRooms, roomsQueryKey } from "@/services/rooms";
 import { ROOMS } from "../content";
 import { SectionContainer } from "../section-container";
 import { SectionLabel } from "../section-label";
@@ -10,14 +10,8 @@ import LANDING from "../tokens";
 import { RoomCard } from "./room-card";
 
 export const Rooms = () => {
-  const [rooms, setRooms] = useState<Room[]>([]);
-
-  useEffect(() => {
-    fetch("/api/rooms")
-      .then((res) => (res.ok ? res.json() : []))
-      .then(setRooms)
-      .catch(() => setRooms([]));
-  }, []);
+  // Shared with the availability search, so the rooms are fetched once.
+  const { data: rooms = [] } = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
 
   return (
     <Box as="section" id="rooms" pt={LANDING.space.section}>

@@ -16,3 +16,15 @@ export async function getRoom(id: number): Promise<Room> {
   if (!response.ok) throw new Error("room_unavailable");
   return response.json();
 }
+
+export const roomAvailabilityQueryKey = (checkIn: string, checkOut: string) =>
+  ["rooms", "availability", checkIn, checkOut] as const;
+
+/** Ids of the rooms free for the whole stay (`YYYY-MM-DD`, check-out exclusive). */
+export async function getRoomAvailability(checkIn: string, checkOut: string): Promise<number[]> {
+  const params = new URLSearchParams({ checkIn, checkOut });
+  const response = await fetch(`/api/rooms/availability?${params}`);
+  if (!response.ok) throw new Error("availability_unavailable");
+  const { roomIds }: { roomIds: number[] } = await response.json();
+  return roomIds;
+}

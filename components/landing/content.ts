@@ -1,9 +1,15 @@
 export const NAV_LINKS = [
-  { label: "The Place", href: "#place" },
-  { label: "Rooms", href: "#rooms" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#footer" },
+  { label: "The Place", href: "/#place" },
+  { label: "Rooms", href: "/#rooms" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#footer" },
 ] as const;
+
+export const RESERVE = {
+  button: "Reserve",
+  href: "/reserve",
+  pageTitle: "Reserve",
+} as const;
 
 export const HERO = {
   kicker: "SLOW DOWN. DISCONNECT. BE. REPEAT.",
@@ -52,6 +58,31 @@ export const PLACE_GALLERY = {
 export const ROOMS = {
   label: "02 — Rooms",
   photoPlaceholder: (name: string) => `${name} — room photograph`,
+} as const;
+
+export const AVAILABILITY = {
+  label: "03 — Availability",
+  heading: "Choose your dates.",
+  note: "Pick a check-in and a check-out day and the number of guests, then check which rooms are free for your stay.",
+  checkInLabel: "Check-in",
+  checkOutLabel: "Check-out",
+  guestsLabel: "Guests",
+  stayLabel: "Stay",
+  emptyDate: "Select a date",
+  emptyStay: "—",
+  previousMonth: "Previous month",
+  nextMonth: "Next month",
+  check: "Check availability",
+  loading: "Checking the rooms…",
+  error: "We couldn't check availability right now. Please try again, or write to us on WhatsApp.",
+  availableTitle: (count: number) =>
+    count === 1 ? "1 room free for your stay" : `${count} rooms free for your stay`,
+  noneTitle: "No rooms free for these dates",
+  noneNote: "Try other dates or fewer guests, or write to us on WhatsApp and we'll help you find a fit.",
+  nights: (count: number) => (count === 1 ? "1 night" : `${count} nights`),
+  guests: (count: number) => (count === 1 ? "1 guest" : `Up to ${count} guests`),
+  perNight: (price: number) => `€${price} / night`,
+  total: (price: number) => `€${price} total`,
 } as const;
 
 export const FAQ = {

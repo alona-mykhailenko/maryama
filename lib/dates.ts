@@ -85,3 +85,17 @@ export function parseDay(value: string): Date {
 export function nightsBetween(checkIn: string, checkOut: string): number {
   return diffInDays(parseDay(checkIn), parseDay(checkOut));
 }
+
+/** Local calendar day as `YYYY-MM-DD` (the inverse of `parseDay`). */
+export function formatIsoDay(date: Date): string {
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+export function isSameDay(a: Date, b: Date): boolean {
+  return startOfDay(a).getTime() === startOfDay(b).getTime();
+}
+
+/** Longest stay the public availability search accepts. */
+export const MAX_STAY_NIGHTS = 90;
