@@ -20,7 +20,7 @@ import {
   startOfWeek,
 } from '@/lib/dates';
 import { bookingsQueryKey, getBookings } from '@/features/bookings/queries';
-import { getRooms, roomsQueryKey } from '@/services/rooms';
+import { getRooms, roomsQueryKey } from '@/features/rooms/queries';
 
 export default function CalendarPage() {
   const [view, setView] = useState<CalendarView>('week');

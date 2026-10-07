@@ -1,4 +1,4 @@
-import type { Room } from "@/services/types/room";
+import type { Room } from "@/features/rooms/types";
 
 /** Where the search stands, from nothing checked yet to the free rooms. */
 export type AvailabilityState =

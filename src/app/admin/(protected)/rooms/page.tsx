@@ -11,8 +11,8 @@ import { PageHeader } from '@/components/admin/layout/page-header';
 import { DataTable } from '@/components/admin/ui/data-table';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
-import { getRooms, roomsQueryKey } from '@/services/rooms';
-import type { Room } from '@/services/types/room';
+import { getRooms, roomsQueryKey } from '@/features/rooms/queries';
+import type { Room } from '@/features/rooms/types';
 
 const columnHelper = createColumnHelper<Room>();
 

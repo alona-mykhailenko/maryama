@@ -1,4 +1,4 @@
-import type { Room } from "@/services/types/room";
+import type { Room } from "@/features/rooms/types";
 
 export interface AvailableRoomProps {
   room: Room;

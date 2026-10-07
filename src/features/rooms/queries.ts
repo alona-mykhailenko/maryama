@@ -1,4 +1,4 @@
-import type { Room } from "@/services/types/room";
+import type { Room } from "@/features/rooms/types";
 
 export const roomsQueryKey = ["rooms"] as const;
 export const roomQueryKey = (id: number) => ["rooms", id] as const;

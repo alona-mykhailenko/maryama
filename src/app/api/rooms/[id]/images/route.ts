@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { getAdmin } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { ROOM_IMAGE_MAX_BYTES, ROOM_IMAGE_TYPES } from "@/lib/room-images";
+import { ROOM_IMAGE_MAX_BYTES, ROOM_IMAGE_TYPES } from "@/features/rooms/image-rules";
 import { createStorageClient } from "@/lib/supbase/storage";
 
 const EXTENSIONS: Record<string, string> = {

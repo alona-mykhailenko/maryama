@@ -1,4 +1,4 @@
-import type { RoomImage } from '@/services/types/room';
+import type { RoomImage } from '@/features/rooms/types';
 
 export interface RoomImageGalleryProps {
   images: RoomImage[];

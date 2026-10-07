@@ -1,4 +1,4 @@
-import type { RoomImage } from "@/services/types/room";
+import type { RoomImage } from "@/features/rooms/types";
 
 /** Uploads photos to a room (admin only). */
 export async function uploadRoomImages({

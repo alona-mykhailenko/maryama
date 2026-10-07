@@ -7,7 +7,7 @@ import FONTS from '@/theme/fonts';
 import { AdminButton } from '@/components/admin/ui/admin-button';
 import { AdminDialog } from '@/components/admin/ui/admin-dialog';
 import { Text } from '@/components/ui/text';
-import { ROOM_IMAGE_MAX_BYTES, ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/lib/room-images';
+import { ROOM_IMAGE_MAX_BYTES, ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/features/rooms/image-rules';
 import { DropZone } from './drop-zone';
 import type { ImageUploadDialogProps } from './props';
 import { UploadPreview } from './upload-preview';

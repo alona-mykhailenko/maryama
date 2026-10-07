@@ -2,7 +2,7 @@
 
 import { Box, Grid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { getRooms, roomsQueryKey } from "@/services/rooms";
+import { getRooms, roomsQueryKey } from "@/features/rooms/queries";
 import { ROOMS } from "@/components/landing/content";
 import { SectionContainer } from "@/components/landing/ui/section-container";
 import { SectionLabel } from "@/components/landing/ui/section-label";

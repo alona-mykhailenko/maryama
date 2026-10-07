@@ -9,7 +9,7 @@ import {
   getRooms,
   roomAvailabilityQueryKey,
   roomsQueryKey,
-} from "@/services/rooms";
+} from "@/features/rooms/queries";
 import LANDING from "@/theme/landing-tokens";
 import { AvailabilityCalendar } from "@/components/landing/availability/availability-calendar";
 import { CheckAvailabilityButton } from "@/components/landing/availability/check-availability-button";

@@ -11,19 +11,19 @@ import FONTS from '@/theme/fonts';
 import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';
 import { PencilIcon } from '@/components/admin/icons/pencil';
 import { PageHeader } from '@/components/admin/layout/page-header';
-import { ImageUploadDialog } from '@/components/admin/rooms/image-upload-dialog';
-import { RoomImageGallery } from '@/components/admin/rooms/room-image-gallery';
-import { RoomPriceCard } from '@/components/admin/rooms/room-price-card';
-import { RoomUpcomingBookings } from '@/components/admin/rooms/room-upcoming-bookings';
+import { ImageUploadDialog } from '@/features/rooms/components/image-upload-dialog';
+import { RoomImageGallery } from '@/features/rooms/components/room-image-gallery';
+import { RoomPriceCard } from '@/features/rooms/components/room-price-card';
+import { RoomUpcomingBookings } from '@/features/rooms/components/room-upcoming-bookings';
 import ADMIN from '@/theme/admin-tokens';
 import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
 import { parseDay, startOfDay } from '@/lib/dates';
 import { bookingsQueryKey, getBookings } from '@/features/bookings/queries';
-import { deleteRoomImage, uploadRoomImages } from '@/services/room-images';
-import { getRoom, roomQueryKey, roomsQueryKey } from '@/services/rooms';
-import type { RoomImage } from '@/services/types/room';
+import { deleteRoomImage, uploadRoomImages } from '@/features/rooms/image-queries';
+import { getRoom, roomQueryKey, roomsQueryKey } from '@/features/rooms/queries';
+import type { RoomImage } from '@/features/rooms/types';
 
 const UPCOMING_LIMIT = 5;
 

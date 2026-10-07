@@ -20,7 +20,7 @@ import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/features/bookings/status';
 import { formatShortDate, nightsBetween } from '@/lib/dates';
 import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/features/bookings/queries';
-import { getRooms, roomsQueryKey } from '@/services/rooms';
+import { getRooms, roomsQueryKey } from '@/features/rooms/queries';
 import type { Booking } from '@/features/bookings/types';
 
 const PAGE_SIZE = 8;

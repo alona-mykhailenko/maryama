@@ -6,7 +6,7 @@ import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { UploadIcon } from '@/components/admin/icons/upload';
 import { Text } from '@/components/ui/text';
-import { ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/lib/room-images';
+import { ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/features/rooms/image-rules';
 import ADMIN from '@/theme/admin-tokens';
 import type { DropZoneProps } from './props';
 
