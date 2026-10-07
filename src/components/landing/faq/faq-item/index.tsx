@@ -1,6 +1,6 @@
 import { Box, HStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
-import { Text } from "@/components/core/text";
+import { Text } from "@/components/ui/text";
 import LANDING from "@/theme/landing-tokens";
 import { ToggleIcon } from "@/components/landing/faq/toggle-icon";
 import type { FaqItemProps } from "./props";

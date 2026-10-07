@@ -1,7 +1,7 @@
 import { Box, HStack, VStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { formatShortDate } from '@/lib/dates';
 import ADMIN from '@/theme/admin-tokens';
 import type { RoomUpcomingBookingsProps } from './props';

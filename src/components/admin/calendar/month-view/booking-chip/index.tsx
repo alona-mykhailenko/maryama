@@ -1,5 +1,5 @@
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/lib/booking-status';
 import type { BookingChipProps } from './props';
 

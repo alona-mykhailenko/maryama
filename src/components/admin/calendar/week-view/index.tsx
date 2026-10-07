@@ -1,7 +1,7 @@
 import { Box, Grid } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { addDays, diffInDays, formatDayNum, formatDow, parseDay } from '@/lib/dates';
 import ADMIN from '@/theme/admin-tokens';
 import { BookingBar } from './booking-bar';

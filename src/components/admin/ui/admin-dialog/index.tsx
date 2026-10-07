@@ -4,7 +4,7 @@ import { Dialog, type DialogOpenChangeDetails, HStack, IconButton, Portal } from
 import COLORS from '@/theme/colors';
 import FONTS, { sora } from '@/theme/fonts';
 import { XIcon } from '@/components/admin/icons/x';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import ADMIN from '@/theme/admin-tokens';
 import type { AdminDialogProps } from './props';
 

@@ -1,6 +1,6 @@
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import type { ToggleOptionProps } from './props';
 
 /** One pill of the toggle; white and raised when active. */

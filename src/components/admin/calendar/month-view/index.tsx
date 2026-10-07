@@ -1,7 +1,7 @@
 import { Box, Grid, VStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { addDays, monthGridStart, overlapsDay, parseDay, WEEKDAY_LABELS } from '@/lib/dates';
 import ADMIN from '@/theme/admin-tokens';
 import { BookingChip } from './booking-chip';

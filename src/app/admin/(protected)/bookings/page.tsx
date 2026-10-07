@@ -16,7 +16,7 @@ import { QueryState } from '@/components/admin/ui/query-state';
 import { SegmentedTabs } from '@/components/admin/ui/segmented-tabs';
 import type { SegmentedOption } from '@/components/admin/ui/segmented-toggle/props';
 import { StatusBadge } from '@/components/admin/ui/status-badge';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/lib/booking-status';
 import { formatShortDate, nightsBetween } from '@/lib/dates';
 import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/services/bookings';

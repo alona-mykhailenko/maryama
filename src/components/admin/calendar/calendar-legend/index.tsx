@@ -1,7 +1,7 @@
 import { Box, HStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { BOOKING_STATUS_TONE } from '@/lib/booking-status';
 
 /** Swatch + label for every booking status, under the calendar. */

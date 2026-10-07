@@ -7,7 +7,7 @@ import FONTS from '@/theme/fonts';
 import { BedIcon } from '@/components/admin/icons/bed';
 import { CalendarIcon } from '@/components/admin/icons/calendar';
 import { ClipboardIcon } from '@/components/admin/icons/clipboard';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import ADMIN from '@/theme/admin-tokens';
 import type { SidebarProps } from './props';
 import { SidebarNavItem } from './sidebar-nav-item';

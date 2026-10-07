@@ -2,7 +2,7 @@ import { Box, VStack } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 
 /**
  * One labelled footer column — a tracked uppercase label over its stacked

@@ -1,7 +1,7 @@
 import { createListCollection, Select, type SelectValueChangeDetails } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
-import { Text } from "@/components/core/text";
+import { Text } from "@/components/ui/text";
 import { AVAILABILITY } from "@/components/landing/content";
 import { ChevronDownIcon } from "@/components/landing/icons/chevron-down";
 import LANDING from "@/theme/landing-tokens";

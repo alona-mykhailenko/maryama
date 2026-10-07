@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import type { GuestCellProps } from './props';
 
 /** Guest name over their email, for the bookings table. */

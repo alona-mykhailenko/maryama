@@ -1,6 +1,6 @@
 import { Box, Grid } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
-import { Text } from "@/components/core/text";
+import { Text } from "@/components/ui/text";
 import { diffInDays } from "@/lib/dates";
 import { AVAILABILITY } from "@/components/landing/content";
 import { GuestsSelect } from "./guests-select";

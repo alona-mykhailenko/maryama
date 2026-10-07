@@ -18,7 +18,7 @@ import { RoomUpcomingBookings } from '@/components/admin/rooms/room-upcoming-boo
 import ADMIN from '@/theme/admin-tokens';
 import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { QueryState } from '@/components/admin/ui/query-state';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { parseDay, startOfDay } from '@/lib/dates';
 import { bookingsQueryKey, getBookings } from '@/services/bookings';
 import { deleteRoomImage, uploadRoomImages } from '@/services/room-images';

@@ -5,7 +5,7 @@ import { type ChangeEvent, type DragEvent, useState } from 'react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { UploadIcon } from '@/components/admin/icons/upload';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { ROOM_IMAGE_MAX_MB, ROOM_IMAGE_TYPES } from '@/lib/room-images';
 import ADMIN from '@/theme/admin-tokens';
 import type { DropZoneProps } from './props';

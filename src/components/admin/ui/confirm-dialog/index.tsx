@@ -3,7 +3,7 @@
 import { VStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { AdminButton } from '@/components/admin/ui/admin-button';
 import { AdminDialog } from '@/components/admin/ui/admin-dialog';
 import type { ConfirmDialogProps } from './props';

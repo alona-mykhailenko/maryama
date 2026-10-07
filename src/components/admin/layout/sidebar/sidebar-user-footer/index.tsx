@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { LogOutIcon } from '@/components/admin/icons/log-out';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { logout } from '@/services/auth';
 import type { SidebarUserFooterProps } from './props';
 

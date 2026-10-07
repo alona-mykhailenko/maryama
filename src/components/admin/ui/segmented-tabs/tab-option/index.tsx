@@ -1,7 +1,7 @@
 import { Box, HStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import type { TabOptionProps } from './props';
 
 /** One filter tab; underlined in ink when active. */

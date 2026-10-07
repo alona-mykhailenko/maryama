@@ -10,7 +10,7 @@ import { ChevronRightIcon } from '@/components/admin/icons/chevron-right';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import { DataTable } from '@/components/admin/ui/data-table';
 import { QueryState } from '@/components/admin/ui/query-state';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
 import type { Room } from '@/services/types/room';
 

@@ -1,6 +1,6 @@
 import { Box, HStack } from '@chakra-ui/react';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import ADMIN from '@/theme/admin-tokens';
 import type { StatusBadgeProps } from './props';
 

@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import COLORS from '@/theme/colors';
 import FONTS, { montserrat } from '@/theme/fonts';
-import { Text } from '@/components/core/text';
-import { TextInput } from '@/components/core/text-input';
+import { Text } from '@/components/ui/text';
+import { TextInput } from '@/components/ui/text-input';
 import { login } from '@/services/auth';
 import { type LoginValues, validateLogin } from '@/utils/validations/login-schema';
 

@@ -4,7 +4,7 @@ import { Box, Table } from '@chakra-ui/react';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import type { DataTableProps } from './props';
 
 /**

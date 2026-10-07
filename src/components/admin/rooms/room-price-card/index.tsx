@@ -2,7 +2,7 @@ import { Box, HStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { PencilIcon } from '@/components/admin/icons/pencil';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import ADMIN from '@/theme/admin-tokens';
 import type { RoomPriceCardProps } from './props';
 

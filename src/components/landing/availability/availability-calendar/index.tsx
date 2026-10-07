@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Box, chakra, Grid, HStack, VStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
-import { Text } from "@/components/core/text";
+import { Text } from "@/components/ui/text";
 import {
   addDays,
   formatMonthLabel,

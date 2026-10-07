@@ -1,6 +1,6 @@
 import { Box, type BoxProps } from '@chakra-ui/react';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 
 /**
  * The tracked, uppercase eyebrow used above every section heading

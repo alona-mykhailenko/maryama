@@ -1,7 +1,7 @@
 import { Box, HStack, VStack } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
-import { Text } from "@/components/core/text";
+import { Text } from "@/components/ui/text";
 import { AVAILABILITY, ROOMS } from "@/components/landing/content";
 import { ImageSlot } from "@/components/landing/image-slot";
 import type { AvailableRoomProps } from "./props";

@@ -1,7 +1,7 @@
 import { Box, chakra } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { Text } from '@/components/core/text';
+import { Text } from '@/components/ui/text';
 import { formatDayNum } from '@/lib/dates';
 import LANDING from '@/theme/landing-tokens';
 import type { DayCellProps } from './props';
