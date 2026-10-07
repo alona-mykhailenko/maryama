@@ -1,4 +1,4 @@
-import type { LoginPayload } from "@/services/types/auth";
+import type { LoginPayload } from "@/features/auth/types";
 
 /**
  * Logs an admin in. Supabase sets the session cookie in the response.

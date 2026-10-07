@@ -9,8 +9,8 @@ import COLORS from '@/theme/colors';
 import FONTS, { montserrat } from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
 import { TextInput } from '@/components/ui/text-input';
-import { login } from '@/services/auth';
-import { type LoginValues, validateLogin } from '@/utils/validations/login-schema';
+import { login } from '@/features/auth/queries';
+import { type LoginValues, validateLogin } from '@/features/auth/schema';
 
 export default function Login() {
   const router = useRouter();
