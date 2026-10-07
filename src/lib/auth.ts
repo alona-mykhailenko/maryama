@@ -1,6 +1,6 @@
 import "server-only";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supbase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export async function getAdmin() {
   const supabase = await createClient();

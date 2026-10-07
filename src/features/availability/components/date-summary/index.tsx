@@ -2,7 +2,7 @@ import { Box, Grid } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { diffInDays } from "@/lib/dates";
-import { AVAILABILITY } from "@/components/landing/content";
+import { AVAILABILITY } from "@/config/content";
 import { GuestsSelect } from "./guests-select";
 import type { DateSummaryProps } from "./props";
 import { SummaryField } from "./summary-field";

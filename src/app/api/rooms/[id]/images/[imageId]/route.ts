@@ -1,6 +1,6 @@
 import { getAdmin } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { createStorageClient, storagePathFromUrl } from "@/lib/supbase/storage";
+import { createStorageClient, storagePathFromUrl } from "@/lib/supabase/storage";
 
 /** Admin only: removes a room photo from Storage and the database. */
 export async function DELETE(

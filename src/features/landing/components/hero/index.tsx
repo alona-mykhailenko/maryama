@@ -2,7 +2,7 @@ import { Box, VStack } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
-import { HERO } from "@/components/landing/content";
+import { HERO } from "@/config/content";
 import { ImageSlot } from "@/components/landing/ui/image-slot";
 import LANDING from "@/theme/landing-tokens";
 

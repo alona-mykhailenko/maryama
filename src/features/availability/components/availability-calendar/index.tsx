@@ -14,7 +14,7 @@ import {
   startOfMonth,
   WEEKDAY_LABELS,
 } from "@/lib/dates";
-import { AVAILABILITY } from "@/components/landing/content";
+import { AVAILABILITY } from "@/config/content";
 import { ChevronLeftIcon } from "@/components/landing/icons/chevron-left";
 import { ChevronRightIcon } from "@/components/landing/icons/chevron-right";
 import LANDING from "@/theme/landing-tokens";

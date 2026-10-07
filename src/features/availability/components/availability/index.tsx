@@ -1,7 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
-import { AVAILABILITY } from "@/components/landing/content";
+import { AVAILABILITY } from "@/config/content";
 import { SplitSection } from "@/components/landing/ui/split-section";
 import LANDING from "@/theme/landing-tokens";
 import { AvailabilityForm } from "@/features/availability/components/availability-form";

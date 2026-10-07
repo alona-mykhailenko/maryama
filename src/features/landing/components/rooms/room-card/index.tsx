@@ -2,7 +2,7 @@ import { Box, Link } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
-import { ROOMS } from '@/components/landing/content';
+import { ROOMS } from '@/config/content';
 import { ImageSlot } from '@/components/landing/ui/image-slot';
 import LANDING from '@/theme/landing-tokens';
 import type { RoomCardProps } from './props';

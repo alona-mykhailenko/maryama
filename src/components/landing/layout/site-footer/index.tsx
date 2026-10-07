@@ -2,7 +2,7 @@ import { Box, Grid, HStack, VStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
-import { FOOTER } from '@/components/landing/content';
+import { FOOTER } from '@/config/content';
 import { InstagramIcon } from '@/components/landing/icons/instagram';
 import { SectionContainer } from '@/components/landing/ui/section-container';
 import { WhatsAppIcon } from '@/components/landing/icons/whatsapp';

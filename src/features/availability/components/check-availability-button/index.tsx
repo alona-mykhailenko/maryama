@@ -2,7 +2,7 @@ import { chakra } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
-import { AVAILABILITY } from "@/components/landing/content";
+import { AVAILABILITY } from "@/config/content";
 import LANDING from "@/theme/landing-tokens";
 import type { CheckAvailabilityButtonProps } from "./props";
 

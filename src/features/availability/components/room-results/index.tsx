@@ -2,7 +2,7 @@ import { Box, VStack } from "@chakra-ui/react";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
-import { AVAILABILITY } from "@/components/landing/content";
+import { AVAILABILITY } from "@/config/content";
 import { AvailableRoom } from "./available-room";
 import type { AvailabilityState, RoomResultsProps } from "./props";
 

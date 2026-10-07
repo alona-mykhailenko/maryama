@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Box } from "@chakra-ui/react";
 import { AvailabilityForm } from "@/features/availability/components/availability-form";
-import { RESERVE } from "@/components/landing/content";
+import { RESERVE } from "@/config/content";
 import { PageShell } from "@/components/landing/layout/page-shell";
 import { SectionContainer } from "@/components/landing/ui/section-container";
 import LANDING from "@/theme/landing-tokens";

@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
-import { RESERVE } from "@/components/landing/content";
+import { RESERVE } from "@/config/content";
 import LANDING from "@/theme/landing-tokens";
 import type { ReserveButtonProps } from "./props";
 
