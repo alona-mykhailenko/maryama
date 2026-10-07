@@ -7,7 +7,7 @@ import { ChevronRightIcon } from '@/components/admin/icons/chevron-right';
 import { SegmentedToggle } from '@/components/admin/ui/segmented-toggle';
 import { Text } from '@/components/ui/text';
 import ADMIN from '@/theme/admin-tokens';
-import type { CalendarView } from '@/components/admin/calendar/types';
+import type { CalendarView } from '@/features/calendar/types';
 import type { CalendarToolbarProps } from './props';
 
 const VIEW_OPTIONS: { value: CalendarView; label: string }[] = [
