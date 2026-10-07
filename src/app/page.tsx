@@ -1,6 +1,6 @@
 import { Faq } from "@/components/landing/faq";
 import { Hero } from "@/components/landing/hero";
-import { PageShell } from "@/components/landing/page-shell";
+import { PageShell } from "@/components/landing/layout/page-shell";
 import { PlaceGallery } from "@/components/landing/place-gallery";
 import { Rooms } from "@/components/landing/rooms";
 import { ThePlace } from "@/components/landing/the-place";

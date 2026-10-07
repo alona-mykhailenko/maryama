@@ -4,7 +4,7 @@ import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
 import { FOOTER } from '@/components/landing/content';
 import { InstagramIcon } from '@/components/landing/icons/instagram';
-import { SectionContainer } from '@/components/landing/section-container';
+import { SectionContainer } from '@/components/landing/ui/section-container';
 import { WhatsAppIcon } from '@/components/landing/icons/whatsapp';
 import LANDING from '@/theme/landing-tokens';
 import { FooterColumn } from './footer-column';

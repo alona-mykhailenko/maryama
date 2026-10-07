@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { montserrat } from "@/theme/fonts";
-import { Navbar } from "@/components/landing/navbar";
-import { RESERVE_BAR_HEIGHT } from "@/components/landing/navbar/reserve-bar";
-import { SiteFooter } from "@/components/landing/site-footer";
+import { Navbar } from "@/components/landing/layout/navbar";
+import { RESERVE_BAR_HEIGHT } from "@/components/landing/layout/navbar/reserve-bar";
+import { SiteFooter } from "@/components/landing/layout/site-footer";
 import LANDING from "@/theme/landing-tokens";
 import type { PageShellProps } from "./props";
 

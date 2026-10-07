@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { PLACE_GALLERY } from "@/components/landing/content";
-import { ImageSlot } from "@/components/landing/image-slot";
-import { SectionContainer } from "@/components/landing/section-container";
+import { ImageSlot } from "@/components/landing/ui/image-slot";
+import { SectionContainer } from "@/components/landing/ui/section-container";
 import LANDING from "@/theme/landing-tokens";
 
 /**
