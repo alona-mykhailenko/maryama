@@ -40,6 +40,7 @@ model Booking {
   checkOut   DateTime      @db.Date
   guestName  String
   guestEmail String
+  guestPhone String?     // null for bookings made before it was collected
   guests     Int
   message    String?
   status     BookingStatus @default(PENDING)
