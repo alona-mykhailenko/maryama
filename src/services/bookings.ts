@@ -10,6 +10,16 @@ export async function getBookings(): Promise<Booking[]> {
   return response.json();
 }
 
+/** Under `bookingsQueryKey`, so invalidating the list refreshes it too. */
+export const bookingQueryKey = (id: number) => ["bookings", id] as const;
+
+/** One booking (admin only). */
+export async function getBooking(id: number): Promise<Booking> {
+  const response = await fetch(`/api/bookings/${id}`);
+  if (!response.ok) throw new Error("booking_unavailable");
+  return response.json();
+}
+
 /** Moves a booking to a new status (admin only). */
 export async function updateBookingStatus({
   id,

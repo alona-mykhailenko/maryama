@@ -1,13 +1,13 @@
 'use client';
 
 import { VStack } from '@chakra-ui/react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { BookingActions } from '@/features/admin/bookings/components/booking-actions';
 import { GuestCell } from '@/features/admin/bookings/components/guest-cell';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import { DataTable } from '@/components/admin/ui/data-table';
@@ -19,7 +19,7 @@ import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/features/admin/bookings/status';
 import { formatShortDate, nightsBetween } from '@/lib/dates';
-import { bookingsQueryKey, getBookings, updateBookingStatus } from '@/services/bookings';
+import { bookingsQueryKey, getBookings } from '@/services/bookings';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
 import type { Booking } from '@/features/bookings/types';
 
@@ -42,14 +42,9 @@ export default function BookingsPage() {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [page, setPage] = useState(1);
 
-  const queryClient = useQueryClient();
+  const router = useRouter();
   const bookings = useQuery({ queryKey: bookingsQueryKey, queryFn: getBookings });
   const rooms = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
-
-  const transition = useMutation({
-    mutationFn: updateBookingStatus,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: bookingsQueryKey }),
-  });
 
   const roomsById = useMemo(
     () => new Map((rooms.data ?? []).map((room) => [room.id, room])),
@@ -127,21 +122,11 @@ export default function BookingsPage() {
           );
         },
       }),
-      columnHelper.display({
-        id: 'actions',
-        header: () => 'Actions',
-        cell: (info) => (
-          <BookingActions
-            bookingId={info.row.original.id}
-            status={info.row.original.status}
-            disabled={transition.isPending}
-            onTransition={transition.mutate}
-          />
-        ),
-      }),
     ],
-    [roomsById, transition],
+    [roomsById],
   );
+
+  const handleRowClick = (booking: Booking) => router.push(`/admin/bookings/${booking.id}`);
 
   const handleStatusFilterChange = (value: StatusFilter) => {
     setStatusFilter(value);
@@ -172,6 +157,7 @@ export default function BookingsPage() {
               columns={columns}
               data={paged}
               getRowId={getBookingRowId}
+              onRowClick={handleRowClick}
               emptyMessage="No bookings in this view."
             />
             <Pagination
