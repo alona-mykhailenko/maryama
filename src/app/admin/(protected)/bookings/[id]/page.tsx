@@ -3,12 +3,12 @@
 import { Box, Grid, HStack, VStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import ADMIN from '@/theme/admin-tokens';
-import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';
 import { PageHeader } from '@/components/admin/layout/page-header';
+import { BackButton } from '@/components/admin/ui/back-button';
 import { DetailCard } from '@/components/admin/ui/detail-card';
 import { DetailRow } from '@/components/admin/ui/detail-card/detail-row';
 import { QueryState } from '@/components/admin/ui/query-state';
@@ -24,6 +24,7 @@ import { getRoom, roomQueryKey } from '@/services/rooms';
 export default function BookingDetailPage() {
   const params = useParams<{ id: string }>();
   const bookingId = Number(params.id);
+  const router = useRouter();
 
   const booking = useQuery({
     queryKey: bookingQueryKey(bookingId),
@@ -35,6 +36,8 @@ export default function BookingDetailPage() {
     queryFn: () => getRoom(roomId),
     enabled: booking.data !== undefined,
   });
+
+  const handleBack = () => router.back();
 
   const nights = booking.data ? nightsBetween(booking.data.checkIn, booking.data.checkOut) : 0;
 
@@ -49,14 +52,7 @@ export default function BookingDetailPage() {
         borderBottom="1px solid"
         borderColor={COLORS.Border.Default}
       >
-        <HStack asChild gap="8px" color={COLORS.Text.FgMuted} _hover={{ color: COLORS.Text.Fg }}>
-          <Link href="/admin/bookings">
-            <ChevronLeftIcon size={16} />
-            <Text font={FONTS.T2.T14px.Regular} color="inherit">
-              All bookings
-            </Text>
-          </Link>
-        </HStack>
+        <BackButton onBack={handleBack} />
       </HStack>
 
       <QueryState
