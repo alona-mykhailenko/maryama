@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Grid, HStack, VStack } from '@chakra-ui/react';
+import { Grid, HStack, VStack } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -8,7 +8,7 @@ import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { PencilIcon } from '@/components/admin/icons/pencil';
-import { PageHeader } from '@/components/admin/layout/page-header';
+import { PageLayout } from '@/components/admin/layout/page-layout';
 import { ImageUploadDialog } from '@/features/admin/rooms/components/image-upload-dialog';
 import { RoomImageGallery } from '@/features/admin/rooms/components/room-image-gallery';
 import { RoomPriceCard } from '@/features/admin/rooms/components/room-price-card';
@@ -98,85 +98,76 @@ export default function RoomDetailPage() {
   }, [bookings.data, roomId]);
 
   return (
-    <>
-      <PageHeader heading={room.data ? `${room.data.name}` : 'Rooms'} />
-
-      <HStack
-        justify="space-between"
-        gap="16px"
-        px={ADMIN.gutter}
-        py="14px"
-        borderBottom="1px solid"
-        borderColor={COLORS.Border.Default}
-        flexWrap="wrap"
-      >
-        <BackButton />
-        <HStack
-          as="button"
-          title="Editing coming soon"
-          gap="8px"
-          px="15px"
-          py="9px"
-          borderRadius={ADMIN.pill}
-          bg={COLORS.Bg.Inverted}
-          color={COLORS.Text.FgContrast}
-          cursor="not-allowed"
-          opacity={0.6}
-        >
-          <PencilIcon size={16} />
-          <Text font={FONTS.T2.T14px.Medium} color="inherit">
-            Modify room details
-          </Text>
+    <PageLayout
+      heading={room.data ? `${room.data.name}` : 'Rooms'}
+      toolbar={
+        <HStack justify="space-between" gap="16px" py="14px" flexWrap="wrap">
+          <BackButton />
+          <HStack
+            as="button"
+            title="Editing coming soon"
+            gap="8px"
+            px="15px"
+            py="9px"
+            borderRadius={ADMIN.pill}
+            bg={COLORS.Bg.Inverted}
+            color={COLORS.Text.FgContrast}
+            cursor="not-allowed"
+            opacity={0.6}
+          >
+            <PencilIcon size={16} />
+            <Text font={FONTS.T2.T14px.Medium} color="inherit">
+              Modify room details
+            </Text>
+          </HStack>
         </HStack>
-      </HStack>
-
+      }
+    >
       <QueryState
         isLoading={room.isLoading || bookings.isLoading}
         isError={room.isError || bookings.isError}
       />
 
       {room.data && bookings.data && (
-        <Box px={ADMIN.gutter} pt="26px" pb="48px">
-          <Grid
-            templateColumns={{ base: '1fr', lg: 'minmax(0, 1.55fr) minmax(260px, 1fr)' }}
-            gap="26px"
-            alignItems="start"
-          >
-            <VStack align="stretch" gap="12px" minW="0">
-              <RoomImageGallery
-                images={room.data.images}
-                roomName={room.data.name}
-                onAdd={handleAddImages}
-                onDelete={handleDeleteImage}
-              />
+        <Grid
+          templateColumns={{ base: '1fr', lg: 'minmax(0, 1.55fr) minmax(260px, 1fr)' }}
+          gap="26px"
+          alignItems="start"
+        >
+          <VStack align="stretch" gap="12px" minW="0">
+            <RoomImageGallery
+              images={room.data.images}
+              roomName={room.data.name}
+              onAdd={handleAddImages}
+              onDelete={handleDeleteImage}
+            />
 
-              <VStack align="stretch" gap="3px" mt="14px">
-                <Text as="h1" font={FONTS.T2.T24px.Medium} letterSpacing="-0.015em">
-                  {room.data.name}
-                </Text>
-                <Text font={FONTS.T2.T14px.Regular} color={COLORS.Text.FgMuted}>
-                  Sleeps {room.data.capacity}
-                </Text>
-              </VStack>
-
-              {room.data.description && (
-                <Text
-                  font={FONTS.T2.T14px.Regular}
-                  color={COLORS.Text.FgSecondary}
-                  maxW="62ch"
-                  mt="10px"
-                >
-                  {room.data.description}
-                </Text>
-              )}
+            <VStack align="stretch" gap="3px" mt="14px">
+              <Text as="h1" font={FONTS.T2.T24px.Medium} letterSpacing="-0.015em">
+                {room.data.name}
+              </Text>
+              <Text font={FONTS.T2.T14px.Regular} color={COLORS.Text.FgMuted}>
+                Sleeps {room.data.capacity}
+              </Text>
             </VStack>
 
-            <VStack align="stretch" gap="18px" minW="0">
-              <RoomPriceCard pricePerNight={room.data.pricePerNight} />
-              <RoomUpcomingBookings bookings={upcoming} />
-            </VStack>
-          </Grid>
-        </Box>
+            {room.data.description && (
+              <Text
+                font={FONTS.T2.T14px.Regular}
+                color={COLORS.Text.FgSecondary}
+                maxW="62ch"
+                mt="10px"
+              >
+                {room.data.description}
+              </Text>
+            )}
+          </VStack>
+
+          <VStack align="stretch" gap="18px" minW="0">
+            <RoomPriceCard pricePerNight={room.data.pricePerNight} />
+            <RoomUpcomingBookings bookings={upcoming} />
+          </VStack>
+        </Grid>
       )}
 
       <ImageUploadDialog
@@ -201,6 +192,6 @@ export default function RoomDetailPage() {
         loading={remove.isPending}
         error={remove.isError ? 'Could not delete the photo. Please try again.' : null}
       />
-    </>
+    </PageLayout>
   );
 }

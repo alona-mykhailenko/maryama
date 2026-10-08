@@ -2,7 +2,6 @@ import { HStack } from '@chakra-ui/react';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
-import ADMIN from '@/theme/admin-tokens';
 import { PagePill } from './page-pill';
 import type { PaginationProps } from './props';
 
@@ -28,7 +27,7 @@ export const Pagination = ({ page, pageCount, onPageChange, rangeLabel }: Pagina
   const tokens = buildPageTokens(page, pageCount);
 
   return (
-    <HStack justify="space-between" gap="16px" px={ADMIN.gutter} py="18px">
+    <HStack justify="space-between" gap="16px">
       <Text font={FONTS.T2.T12px.Regular} color={COLORS.Text.FgSubtle}>
         {rangeLabel}
       </Text>

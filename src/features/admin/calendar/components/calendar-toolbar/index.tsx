@@ -6,7 +6,6 @@ import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';
 import { ChevronRightIcon } from '@/components/admin/icons/chevron-right';
 import { SegmentedToggle } from '@/components/admin/ui/segmented-toggle';
 import { Text } from '@/components/ui/text';
-import ADMIN from '@/theme/admin-tokens';
 import type { CalendarView } from '@/features/admin/calendar/types';
 import type { CalendarToolbarProps } from './props';
 
@@ -28,10 +27,7 @@ export const CalendarToolbar = ({
     <HStack
       justify="space-between"
       gap="20px"
-      px={ADMIN.gutter}
       py="16px"
-      borderBottom="1px solid"
-      borderColor={COLORS.Border.Default}
       flexWrap="wrap"
     >
       <HStack gap="14px">

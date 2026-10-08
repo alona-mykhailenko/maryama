@@ -4,6 +4,11 @@ export const ADMIN = {
   headerHeight: '74px',
   /** Horizontal page gutter. */
   gutter: '28px',
+  /** Space above / below a page's content column (`PageLayout`). */
+  contentPt: '24px',
+  contentPb: '48px',
+  /** Gap between blocks of a page's content column (`PageLayout`). */
+  sectionGap: '20px',
   /** Cards, tables, calendar frames. */
   radius: '14px',
   /** Nav items, calendar bars. */

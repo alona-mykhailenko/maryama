@@ -1,6 +1,5 @@
 'use client';
 
-import { VStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
@@ -9,7 +8,7 @@ import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { GuestCell } from '@/features/admin/bookings/components/guest-cell';
-import { PageHeader } from '@/components/admin/layout/page-header';
+import { PageLayout } from '@/components/admin/layout/page-layout';
 import { DataTable } from '@/components/admin/ui/data-table';
 import { Pagination } from '@/components/admin/ui/pagination';
 import { QueryState } from '@/components/admin/ui/query-state';
@@ -66,7 +65,7 @@ export default function BookingsPage() {
         header: () => 'Booking',
         cell: (info) => (
           <Text font={FONTS.T2.T14px.Regular} color={COLORS.Text.FgMuted} fontVariantNumeric="tabular-nums">
-            #{info.getValue()}
+            {info.getValue()}
           </Text>
         ),
       }),
@@ -137,42 +136,42 @@ export default function BookingsPage() {
   const rangeTo = Math.min(currentPage * PAGE_SIZE, filtered.length);
 
   return (
-    <>
-      <PageHeader heading="Bookings" />
-      <VStack align="stretch" gap="0" minH="0">
+    <PageLayout
+      heading="Bookings"
+      toolbar={
         <SegmentedTabs
           options={TAB_OPTIONS}
           value={statusFilter}
           onChange={handleStatusFilterChange}
         />
+      }
+    >
+      <QueryState
+        isLoading={bookings.isLoading || rooms.isLoading}
+        isError={bookings.isError || rooms.isError}
+      />
 
-        <QueryState
-          isLoading={bookings.isLoading || rooms.isLoading}
-          isError={bookings.isError || rooms.isError}
-        />
-
-        {bookings.data && rooms.data && (
-          <>
-            <DataTable
-              columns={columns}
-              data={paged}
-              getRowId={getBookingRowId}
-              onRowClick={handleRowClick}
-              emptyMessage="No bookings in this view."
-            />
-            <Pagination
-              page={currentPage}
-              pageCount={pageCount}
-              onPageChange={setPage}
-              rangeLabel={
-                filtered.length === 0
-                  ? 'No bookings'
-                  : `Showing ${rangeFrom}–${rangeTo} of ${filtered.length}`
-              }
-            />
-          </>
-        )}
-      </VStack>
-    </>
+      {bookings.data && rooms.data && (
+        <>
+          <DataTable
+            columns={columns}
+            data={paged}
+            getRowId={getBookingRowId}
+            onRowClick={handleRowClick}
+            emptyMessage="No bookings in this view."
+          />
+          <Pagination
+            page={currentPage}
+            pageCount={pageCount}
+            onPageChange={setPage}
+            rangeLabel={
+              filtered.length === 0
+                ? 'No bookings'
+                : `Showing ${rangeFrom}–${rangeTo} of ${filtered.length}`
+            }
+          />
+        </>
+      )}
+    </PageLayout>
   );
 }
