@@ -15,8 +15,8 @@ import {
   WEEKDAY_LABELS,
 } from "@/lib/dates";
 import { AVAILABILITY } from "@/config/content";
-import { ChevronLeftIcon } from "@/components/landing/icons/chevron-left";
-import { ChevronRightIcon } from "@/components/landing/icons/chevron-right";
+import { ChevronLeftIcon } from "@/components/site/icons/chevron-left";
+import { ChevronRightIcon } from "@/components/site/icons/chevron-right";
 import LANDING from "@/theme/landing-tokens";
 import { DayCell } from "./day-cell";
 import type { AvailabilityCalendarProps } from "./props";

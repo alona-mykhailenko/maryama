@@ -3,7 +3,7 @@ import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { AVAILABILITY, ROOMS } from "@/config/content";
-import { ImageSlot } from "@/components/landing/ui/image-slot";
+import { ImageSlot } from "@/components/site/ui/image-slot";
 import type { AvailableRoomProps } from "./props";
 
 /**

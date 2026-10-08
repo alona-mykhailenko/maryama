@@ -2,7 +2,7 @@ import { Box, VStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { PLACE } from "@/config/content";
-import { SplitSection } from "@/components/landing/ui/split-section";
+import { SplitSection } from "@/components/site/ui/split-section";
 import LANDING from "@/theme/landing-tokens";
 
 /**

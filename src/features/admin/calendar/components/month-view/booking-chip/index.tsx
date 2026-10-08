@@ -1,6 +1,6 @@
 import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
-import { bookingStatusTone } from '@/features/bookings/status';
+import { bookingStatusTone } from '@/features/admin/bookings/status';
 import type { BookingChipProps } from './props';
 
 /** "Room · Guest" chip inside a month-grid day cell. */

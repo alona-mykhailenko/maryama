@@ -5,15 +5,15 @@ import NextLink from "next/link";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { BOOKING } from "@/config/content";
-import { ChevronLeftIcon } from "@/components/landing/icons/chevron-left";
-import { PageShell } from "@/components/landing/layout/page-shell";
-import { SectionContainer } from "@/components/landing/ui/section-container";
+import { ChevronLeftIcon } from "@/components/site/icons/chevron-left";
+import { PageShell } from "@/components/site/layout/page-shell";
+import { SectionContainer } from "@/components/site/ui/section-container";
 import { BookingRoomRow } from "@/features/bookings/components/booking-room-row";
 import type { InitialStay } from "@/features/bookings/components/booking-form/props";
 import { getPublicRoom, parseRoomId } from "@/services/rooms-server";
 import { MAX_STAY_NIGHTS, nightsBetween } from "@/lib/dates";
 import LANDING from "@/theme/landing-tokens";
-import { BookRoomView } from "./book-room-view";
+import { BookRoomView } from "@/features/bookings/components/book-room-view";
 
 export async function generateMetadata(props: PageProps<"/rooms/[id]/book">): Promise<Metadata> {
   const roomId = parseRoomId((await props.params).id);

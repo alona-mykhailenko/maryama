@@ -1,4 +1,4 @@
-import type { CalendarView } from '@/features/calendar/types';
+import type { CalendarView } from '@/features/admin/calendar/types';
 
 export interface CalendarToolbarProps {
   rangeLabel: string;

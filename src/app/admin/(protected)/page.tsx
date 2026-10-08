@@ -3,11 +3,11 @@
 import { Box, VStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { CalendarLegend } from '@/features/calendar/components/calendar-legend';
-import { CalendarToolbar } from '@/features/calendar/components/calendar-toolbar';
-import { MonthView } from '@/features/calendar/components/month-view';
-import type { CalendarView } from '@/features/calendar/types';
-import { WeekView } from '@/features/calendar/components/week-view';
+import { CalendarLegend } from '@/features/admin/calendar/components/calendar-legend';
+import { CalendarToolbar } from '@/features/admin/calendar/components/calendar-toolbar';
+import { MonthView } from '@/features/admin/calendar/components/month-view';
+import type { CalendarView } from '@/features/admin/calendar/types';
+import { WeekView } from '@/features/admin/calendar/components/week-view';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import ADMIN from '@/theme/admin-tokens';
 import { QueryState } from '@/components/admin/ui/query-state';

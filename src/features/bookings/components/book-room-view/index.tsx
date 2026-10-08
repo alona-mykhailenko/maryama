@@ -2,14 +2,9 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { BookingForm } from "@/features/bookings/components/booking-form";
-import type { BookingFormProps } from "@/features/bookings/components/booking-form/props";
 import { BookingSuccess } from "@/features/bookings/components/booking-success";
 import { createBooking } from "@/services/bookings";
-
-interface BookRoomViewProps {
-  room: BookingFormProps["room"];
-  initialStay?: BookingFormProps["initialStay"];
-}
+import type { BookRoomViewProps } from "./props";
 
 /**
  * Client half of the booking page: sends the request from `BookingForm`

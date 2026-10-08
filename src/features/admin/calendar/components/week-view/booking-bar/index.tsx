@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react';
 import FONTS from '@/theme/fonts';
 import { Text } from '@/components/ui/text';
-import { bookingStatusTone } from '@/features/bookings/status';
+import { bookingStatusTone } from '@/features/admin/bookings/status';
 import ADMIN from '@/theme/admin-tokens';
 import type { BookingBarProps } from './props';
 

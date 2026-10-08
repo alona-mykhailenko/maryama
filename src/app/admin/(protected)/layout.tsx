@@ -1,5 +1,5 @@
 import { requireAdmin } from '@/lib/auth';
-import { AdminShell } from './admin-shell';
+import { AdminShell } from '@/components/admin/layout/admin-shell';
 
 /** Every page in this group requires a signed-in admin (the proxy also guards /admin/*). */
 export default async function AdminLayout({ children }: LayoutProps<'/admin'>) {

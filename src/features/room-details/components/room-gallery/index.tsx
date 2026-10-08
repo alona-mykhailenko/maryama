@@ -1,7 +1,7 @@
 import { Grid } from "@chakra-ui/react";
 import { ROOM_DETAILS, ROOMS } from "@/config/content";
-import { ImageSlot } from "@/components/landing/ui/image-slot";
-import { SectionContainer } from "@/components/landing/ui/section-container";
+import { ImageSlot } from "@/components/site/ui/image-slot";
+import { SectionContainer } from "@/components/site/ui/section-container";
 import LANDING from "@/theme/landing-tokens";
 import type { RoomGalleryProps } from "./props";
 

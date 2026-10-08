@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { BOOKING } from "@/config/content";
-import { SectionLabel } from "@/components/landing/ui/section-label";
+import { SectionLabel } from "@/components/site/ui/section-label";
 import LANDING from "@/theme/landing-tokens";
 import type { BookingSuccessProps } from "./props";
 

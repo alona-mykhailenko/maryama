@@ -2,11 +2,12 @@ import { Box, Grid, VStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { AVAILABILITY, ROOM_DETAILS, ROOMS } from "@/config/content";
-import { ImageSlot } from "@/components/landing/ui/image-slot";
-import { SectionContainer } from "@/components/landing/ui/section-container";
-import { SectionLabel } from "@/components/landing/ui/section-label";
+import { ImageSlot } from "@/components/site/ui/image-slot";
+import { SectionContainer } from "@/components/site/ui/section-container";
+import { SectionLabel } from "@/components/site/ui/section-label";
 import LANDING from "@/theme/landing-tokens";
 import { BackLink } from "../back-link";
+import { ReserveCard } from "../reserve-card";
 import { RoomFact } from "./room-fact";
 import type { RoomOverviewProps } from "./props";
 
@@ -19,11 +20,11 @@ const toParagraphs = (description: string) =>
 
 /**
  * Top of a room page, below the solid navbar: the room's first photo in
- * portrait beside its name, description, key facts and the `reserve` slot
- * (the page passes the reserve card).
+ * portrait beside its name, description, key facts and the `ReserveCard`
+ * (the only client part). Server component.
  * The photo stacks above the text on phones.
  */
-export const RoomOverview = ({ room, reserve }: RoomOverviewProps) => {
+export const RoomOverview = ({ room }: RoomOverviewProps) => {
   return (
     <SectionContainer as="section" id="room" pt={{ base: "112px", md: "144px" }}>
       <BackLink />
@@ -61,7 +62,7 @@ export const RoomOverview = ({ room, reserve }: RoomOverviewProps) => {
             <RoomFact label={ROOM_DETAILS.rateLabel} value={AVAILABILITY.perNight(room.pricePerNight)} />
           </Box>
 
-          {reserve}
+          <ReserveCard room={{ id: room.id, capacity: room.capacity, pricePerNight: room.pricePerNight }} />
         </VStack>
       </Grid>
     </SectionContainer>

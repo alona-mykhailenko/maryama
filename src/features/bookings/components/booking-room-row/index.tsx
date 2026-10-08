@@ -2,7 +2,7 @@ import { Box, HStack, VStack } from "@chakra-ui/react";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { AVAILABILITY } from "@/config/content";
-import { ImageSlot } from "@/components/landing/ui/image-slot";
+import { ImageSlot } from "@/components/site/ui/image-slot";
 import type { BookingRoomRowProps } from "./props";
 
 /**

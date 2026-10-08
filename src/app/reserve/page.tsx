@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Box } from "@chakra-ui/react";
 import { RESERVE } from "@/config/content";
-import { PageShell } from "@/components/landing/layout/page-shell";
-import { SectionContainer } from "@/components/landing/ui/section-container";
+import { PageShell } from "@/components/site/layout/page-shell";
+import { SectionContainer } from "@/components/site/ui/section-container";
 import LANDING from "@/theme/landing-tokens";
-import { ReserveSearch } from "./reserve-search";
+import { ReserveSearch } from "@/features/availability/components/reserve-search";
 
 export const metadata: Metadata = {
   title: RESERVE.pageTitle,

@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { ROOMS } from "@/config/content";
-import { SectionContainer } from "@/components/landing/ui/section-container";
-import { SectionLabel } from "@/components/landing/ui/section-label";
+import { SectionContainer } from "@/components/site/ui/section-container";
+import { SectionLabel } from "@/components/site/ui/section-label";
 import LANDING from "@/theme/landing-tokens";
 import { RoomCard } from "./room-card";
 import type { RoomsProps } from "./props";

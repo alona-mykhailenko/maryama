@@ -7,7 +7,7 @@ import type { AvailabilityState } from "@/features/availability/components/room-
 import type { StayDates } from "@/features/availability/types";
 import { diffInDays, formatIsoDay, parseDay } from "@/lib/dates";
 import {
-  getRoomAvailability,
+  checkAvailability,
   getRooms,
   roomAvailabilityQueryKey,
   roomsQueryKey,
@@ -36,7 +36,7 @@ export const ReserveSearch = () => {
   const roomsQuery = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
   const availabilityQuery = useQuery({
     queryKey: roomAvailabilityQueryKey(search?.checkIn ?? "", search?.checkOut ?? ""),
-    queryFn: () => getRoomAvailability(search?.checkIn ?? "", search?.checkOut ?? ""),
+    queryFn: () => checkAvailability(search?.checkIn ?? "", search?.checkOut ?? ""),
     enabled: search !== null,
   });
 

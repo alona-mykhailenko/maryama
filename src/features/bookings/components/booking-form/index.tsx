@@ -9,7 +9,7 @@ import { Text } from "@/components/ui/text";
 import { TextArea } from "@/components/ui/text-area";
 import { TextInput } from "@/components/ui/text-input";
 import { AVAILABILITY, BOOKING } from "@/config/content";
-import { SectionLabel } from "@/components/landing/ui/section-label";
+import { SectionLabel } from "@/components/site/ui/section-label";
 import { AvailabilityCalendar } from "@/features/availability/components/availability-calendar";
 import { DateSummary } from "@/features/availability/components/date-summary";
 import { type BookingRequest, bookingRequestSchema } from "@/features/bookings/schema";

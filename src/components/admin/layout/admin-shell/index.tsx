@@ -1,15 +1,10 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/admin/layout/app-shell';
 import { logout } from '@/services/auth';
-
-interface AdminShellProps {
-  email: string;
-  children: ReactNode;
-}
+import type { AdminShellProps } from './props';
 
 /** Client half of the admin layout: the `AppShell` with its log-out (`POST /api/auth/logout`). */
 export const AdminShell = ({ email, children }: AdminShellProps) => {

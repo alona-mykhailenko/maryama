@@ -2,46 +2,63 @@
 
 import { useState } from "react";
 import { Box, chakra, HStack, Popover, VStack } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { AVAILABILITY, ROOM_DETAILS } from "@/config/content";
 import { AvailabilityCalendar } from "@/features/availability/components/availability-calendar";
 import { GuestsSelect } from "@/features/availability/components/date-summary/guests-select";
+import type { StayDates } from "@/features/availability/types";
 import { diffInDays, formatIsoDay } from "@/lib/dates";
+import { checkAvailability, roomAvailabilityQueryKey } from "@/services/rooms";
 import LANDING from "@/theme/landing-tokens";
 import { ReserveButton } from "./reserve-button";
 import { StayCell } from "./stay-cell";
-import type { ReserveCardProps } from "./props";
+import type { ReserveAvailability, ReserveCardProps } from "./props";
+
+const DEFAULT_GUESTS = 2;
 
 const formatCellDay = (date: Date) =>
   date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
 
 /**
- * The room page's booking box: check-in / check-out (picked on a calendar
- * popover) and guests up to the room's capacity. Once both dates are set it
- * shows the stay total and the `availability` the page checked; "Reserve" then
- * opens the booking form with the stay filled in. Presentational: the stay is
- * controlled by the page, only the popover and shown month live here.
+ * The room page's booking box, and its only client component: check-in /
+ * check-out (picked on a calendar popover) and guests up to the room's
+ * capacity. Once both dates are set it checks the room is free
+ * (`GET /api/rooms/availability`) and shows the stay total; "Reserve" then
+ * opens the booking form with the stay filled in. Nothing is booked from here.
  */
-export const ReserveCard = ({
-  room,
-  checkIn,
-  checkOut,
-  guests,
-  availability,
-  onDatesChange,
-  onGuestsChange,
-}: ReserveCardProps) => {
+export const ReserveCard = ({ room }: ReserveCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [month, setMonth] = useState(() => new Date());
+  const [dates, setDates] = useState<StayDates>({ checkIn: null, checkOut: null });
+  const [guests, setGuests] = useState(() => Math.min(DEFAULT_GUESTS, room.capacity));
+  const { checkIn, checkOut } = dates;
 
+  const checkInDay = checkIn ? formatIsoDay(checkIn) : "";
+  const checkOutDay = checkOut ? formatIsoDay(checkOut) : "";
   const hasStay = checkIn !== null && checkOut !== null;
+
+  const availabilityQuery = useQuery({
+    queryKey: roomAvailabilityQueryKey(checkInDay, checkOutDay),
+    queryFn: () => checkAvailability(checkInDay, checkOutDay),
+    enabled: hasStay,
+  });
+
+  const getAvailability = (): ReserveAvailability => {
+    if (!hasStay) return "idle";
+    if (availabilityQuery.isError) return "error";
+    if (!availabilityQuery.data) return "checking";
+    return availabilityQuery.data.includes(room.id) ? "available" : "unavailable";
+  };
+
+  const availability = getAvailability();
   const nights = hasStay ? diffInDays(checkIn, checkOut) : null;
   const bookHref = hasStay
     ? `${ROOM_DETAILS.bookHref(room.id)}?${new URLSearchParams({
-        checkIn: formatIsoDay(checkIn),
-        checkOut: formatIsoDay(checkOut),
+        checkIn: checkInDay,
+        checkOut: checkOutDay,
         guests: String(guests),
       })}`
     : ROOM_DETAILS.bookHref(room.id);
@@ -52,14 +69,14 @@ export const ReserveCard = ({
 
   const handleSelect = (day: Date) => {
     if (checkIn === null || checkOut !== null || day <= checkIn) {
-      onDatesChange({ checkIn: day, checkOut: null });
+      setDates({ checkIn: day, checkOut: null });
       return;
     }
-    onDatesChange({ checkIn, checkOut: day });
+    setDates({ checkIn, checkOut: day });
     setIsOpen(false);
   };
 
-  const handleClear = () => onDatesChange({ checkIn: null, checkOut: null });
+  const handleClear = () => setDates({ checkIn: null, checkOut: null });
 
   const renderAction = () => {
     if (!hasStay) return <ReserveButton label={AVAILABILITY.check} onClick={handleOpen} />;
@@ -206,7 +223,7 @@ export const ReserveCard = ({
 
         <Box borderTop="1px solid" borderColor={LANDING.ink}>
           <StayCell label={AVAILABILITY.guestsLabel}>
-            <GuestsSelect value={guests} max={room.capacity} onChange={onGuestsChange} />
+            <GuestsSelect value={guests} max={room.capacity} onChange={setGuests} />
           </StayCell>
         </Box>
       </Box>

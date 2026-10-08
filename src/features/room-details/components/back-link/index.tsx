@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { ROOM_DETAILS } from "@/config/content";
-import { ChevronLeftIcon } from "@/components/landing/icons/chevron-left";
+import { ChevronLeftIcon } from "@/components/site/icons/chevron-left";
 
 /** Small tracked "‹ All rooms" link back to the landing rooms section. */
 export const BackLink = () => {

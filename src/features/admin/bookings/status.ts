@@ -1,12 +1,7 @@
 import COLORS from '@/theme/colors';
 import { BookingStatus } from '@/generated/prisma/enums';
+import type { StatusTone } from '@/components/admin/ui/status-badge/props';
 
-export interface StatusTone {
-  label: string;
-  bg: string;
-  fg: string;
-  border: string;
-}
 
 /** Visual tone per booking status — shared by table badges and calendar bars. */
 export const BOOKING_STATUS_TONE: Record<BookingStatus, StatusTone> = {
