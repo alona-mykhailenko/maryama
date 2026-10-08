@@ -1,4 +1,4 @@
 export interface BackButtonProps {
-  /** Page to go back to. */
+  /** Custom back action; defaults to `router.back()`. */
   onBack?: () => void;
 }

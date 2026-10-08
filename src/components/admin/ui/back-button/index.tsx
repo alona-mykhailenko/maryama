@@ -8,18 +8,17 @@ import { ChevronLeftIcon } from "@/components/admin/icons/chevron-left";
 import { Text } from "@/components/ui/text";
 import type { BackButtonProps } from "./props";
 
-/** "‹ Back" button that navigates to `href`. */
+/** "‹ Back" button: calls `onBack`, or goes to the previous page when none is given. */
 export const BackButton = ({ onBack }: BackButtonProps) => {
   const router = useRouter();
 
-   const handleBack = () => {
+  const handleBack = () => {
     if (onBack) {
       onBack();
     } else {
       router.back();
     }
   };
-
 
   return (
     <HStack

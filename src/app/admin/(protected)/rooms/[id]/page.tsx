@@ -2,13 +2,11 @@
 
 import { Box, Grid, HStack, VStack } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
-import { ChevronLeftIcon } from '@/components/admin/icons/chevron-left';
 import { PencilIcon } from '@/components/admin/icons/pencil';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import { ImageUploadDialog } from '@/features/admin/rooms/components/image-upload-dialog';
@@ -16,6 +14,7 @@ import { RoomImageGallery } from '@/features/admin/rooms/components/room-image-g
 import { RoomPriceCard } from '@/features/admin/rooms/components/room-price-card';
 import { RoomUpcomingBookings } from '@/features/admin/rooms/components/room-upcoming-bookings';
 import ADMIN from '@/theme/admin-tokens';
+import { BackButton } from '@/components/admin/ui/back-button';
 import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
@@ -111,14 +110,7 @@ export default function RoomDetailPage() {
         borderColor={COLORS.Border.Default}
         flexWrap="wrap"
       >
-        <HStack asChild gap="8px" color={COLORS.Text.FgMuted} _hover={{ color: COLORS.Text.Fg }}>
-          <Link href="/admin/rooms">
-            <ChevronLeftIcon size={16} />
-            <Text font={FONTS.T2.T14px.Regular} color="inherit">
-              All rooms
-            </Text>
-          </Link>
-        </HStack>
+        <BackButton />
         <HStack
           as="button"
           title="Editing coming soon"
