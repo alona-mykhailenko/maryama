@@ -1,26 +1,39 @@
 'use client';
 
 import { Box, Grid, HStack, VStack } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { BookingStatus } from '@/generated/prisma/enums';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import ADMIN from '@/theme/admin-tokens';
 import { PageHeader } from '@/components/admin/layout/page-header';
 import { BackButton } from '@/components/admin/ui/back-button';
+import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
 import { DetailCard } from '@/components/admin/ui/detail-card';
 import { DetailRow } from '@/components/admin/ui/detail-card/detail-row';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
+import { BookingStatusActions } from '@/features/admin/bookings/components/booking-status-actions';
 import { BookingTotalCard } from '@/features/admin/bookings/components/booking-total-card';
 import { bookingStatusTone } from '@/features/admin/bookings/status';
 import { formatDateTime, formatLongDate, nightsBetween } from '@/lib/dates';
-import { bookingQueryKey, getBooking } from '@/services/bookings';
+import {
+  bookingQueryKey,
+  bookingsQueryKey,
+  getBooking,
+  updateBookingStatus,
+} from '@/services/bookings';
 import { getRoom, roomQueryKey } from '@/services/rooms';
 
-/** Read-only view of one booking: stay, guest, message and total. */
+const STATUS_ERRORS: Record<string, string> = {
+  invalid_transition: 'This booking was changed elsewhere. Its current status is shown above.',
+};
+
+/** One booking: stay, guest, message and total, with accept / cancel actions. */
 export default function BookingDetailPage() {
   const params = useParams<{ id: string }>();
   const bookingId = Number(params.id);
@@ -37,7 +50,32 @@ export default function BookingDetailPage() {
     enabled: booking.data !== undefined,
   });
 
+  const queryClient = useQueryClient();
+  const changeStatus = useMutation({
+    mutationFn: (status: BookingStatus) => updateBookingStatus({ id: bookingId, status }),
+    onSuccess: (updated) => {
+      queryClient.setQueryData(bookingQueryKey(bookingId), updated);
+      setConfirmCancel(false);
+    },
+    // The list key prefixes this booking's key, so this also refetches it after a 409.
+    onSettled: () => queryClient.invalidateQueries({ queryKey: bookingsQueryKey }),
+  });
+
+  const [confirmCancel, setConfirmCancel] = useState(false);
+
   const handleBack = () => router.back();
+
+  const handleTransition = (status: BookingStatus) => {
+    changeStatus.reset();
+    if (status === BookingStatus.CANCELLED) setConfirmCancel(true);
+    else changeStatus.mutate(status);
+  };
+
+  const handleConfirmCancel = () => changeStatus.mutate(BookingStatus.CANCELLED);
+
+  const statusError = changeStatus.error
+    ? (STATUS_ERRORS[changeStatus.error.message] ?? 'Could not update the booking. Please try again.')
+    : null;
 
   const nights = booking.data ? nightsBetween(booking.data.checkIn, booking.data.checkOut) : 0;
 
@@ -101,6 +139,16 @@ export default function BookingDetailPage() {
                   <StatusBadge tone={bookingStatusTone(booking.data.status)} />
                 </DetailRow>
                 <DetailRow label="Requested">{formatDateTime(booking.data.createdAt)}</DetailRow>
+                <Box mt="16px">
+                  <BookingStatusActions
+                    status={booking.data.status}
+                    pendingStatus={
+                      changeStatus.isPending && !confirmCancel ? changeStatus.variables : null
+                    }
+                    onTransition={handleTransition}
+                    error={confirmCancel ? null : statusError}
+                  />
+                </Box>
               </DetailCard>
 
               <BookingTotalCard pricePerNight={room.data.pricePerNight} nights={nights} />
@@ -108,6 +156,17 @@ export default function BookingDetailPage() {
           </Grid>
         </Box>
       )}
+
+      <ConfirmDialog
+        open={confirmCancel}
+        onOpenChange={setConfirmCancel}
+        title="Cancel booking?"
+        description="The guest's nights will be released for other bookings. A cancelled booking can't be accepted again."
+        confirmLabel="Cancel booking"
+        onConfirm={handleConfirmCancel}
+        loading={changeStatus.isPending}
+        error={statusError}
+      />
     </>
   );
 }

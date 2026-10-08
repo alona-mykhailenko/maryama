@@ -20,7 +20,10 @@ export async function getBooking(id: number): Promise<Booking> {
   return response.json();
 }
 
-/** Moves a booking to a new status (admin only). */
+/**
+ * Moves a booking to a new status (admin only).
+ * @throws Error with the API's error code ("invalid_transition", "not_found", …)
+ */
 export async function updateBookingStatus({
   id,
   status,
@@ -33,7 +36,10 @@ export async function updateBookingStatus({
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status }),
   });
-  if (!response.ok) throw new Error("booking_update_failed");
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    throw new Error(body?.error ?? "booking_update_failed");
+  }
   return response.json();
 }
 
