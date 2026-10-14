@@ -4,12 +4,12 @@ import { DetailCard } from '@/components/admin/ui/detail-card';
 import { Text } from '@/components/ui/text';
 import type { BookingTotalCardProps } from './props';
 
-/** Stay total with its nightly breakdown, at the room's current price. */
-export const BookingTotalCard = ({ pricePerNight, nights }: BookingTotalCardProps) => {
+/** Stay total with its nightly breakdown, at the price locked in when the booking was made. */
+export const BookingTotalCard = ({ pricePerNight, nights, totalPrice }: BookingTotalCardProps) => {
   return (
     <DetailCard title="Total">
       <Text font={FONTS.T2.T36px.Medium} letterSpacing="-0.02em" fontVariantNumeric="tabular-nums">
-        €{pricePerNight * nights}
+        €{totalPrice}
       </Text>
       <Text
         font={FONTS.T2.T14px.Regular}

@@ -58,7 +58,7 @@ export async function POST(request: Request) {
   try {
     const result = await prisma.$transaction(
       async (tx) => {
-        const room = await tx.room.findUnique({ where: { id: roomId }, select: { capacity: true } });
+        const room = await tx.room.findUnique({ where: { id: roomId }, select: { capacity: true, pricePerNight: true } });
         if (!room) return { error: "not_found", status: 404 } as const;
         if (guests > room.capacity) return { error: "too_many_guests", status: 400 } as const;
 
@@ -82,6 +82,8 @@ export async function POST(request: Request) {
             guestEmail,
             guestPhone,
             message: message || null,
+            pricePerNight: room.pricePerNight,
+            totalPrice: room.pricePerNight * nights,
             status: BookingStatus.PENDING,
           },
           select: { id: true, status: true },

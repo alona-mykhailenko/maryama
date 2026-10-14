@@ -17,7 +17,7 @@ import type { SegmentedOption } from '@/components/admin/ui/segmented-toggle/pro
 import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/features/admin/bookings/status';
-import { formatShortDate, nightsBetween } from '@/lib/dates';
+import { formatShortDate } from '@/lib/dates';
 import { bookingsQueryKey, getBookings } from '@/services/bookings';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
 import type { Booking } from '@/features/bookings/types';
@@ -111,15 +111,11 @@ export default function BookingsPage() {
         id: 'total',
         header: () => 'Total',
         meta: { align: 'right' },
-        cell: (info) => {
-          const room = roomsById.get(info.row.original.roomId);
-          const nights = nightsBetween(info.row.original.checkIn, info.row.original.checkOut);
-          return (
-            <Text font={FONTS.T2.T14px.Medium} fontVariantNumeric="tabular-nums">
-              {room ? `€${nights * room.pricePerNight}` : '—'}
-            </Text>
-          );
-        },
+        cell: (info) => (
+          <Text font={FONTS.T2.T14px.Medium} fontVariantNumeric="tabular-nums">
+            €{info.row.original.totalPrice}
+          </Text>
+        ),
       }),
     ],
     [roomsById],

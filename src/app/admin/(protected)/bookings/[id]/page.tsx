@@ -144,7 +144,11 @@ export default function BookingDetailPage() {
               </Box>
             </DetailCard>
 
-            <BookingTotalCard pricePerNight={room.data.pricePerNight} nights={nights} />
+            <BookingTotalCard
+              pricePerNight={booking.data.pricePerNight}
+              nights={nights}
+              totalPrice={booking.data.totalPrice}
+            />
           </VStack>
         </Grid>
       )}
