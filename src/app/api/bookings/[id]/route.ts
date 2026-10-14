@@ -8,6 +8,30 @@ const updateBookingSchema = z.object({
   status: z.enum(BookingStatus),
 });
 
+/** Admin only: one booking. Unknown ids get 404. */
+export async function GET(_request: Request, ctx: RouteContext<"/api/bookings/[id]">) {
+  if (!(await getAdmin())) {
+    return Response.json({ error: "unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await ctx.params;
+  const bookingId = Number(id);
+  if (!Number.isInteger(bookingId)) {
+    return Response.json({ error: "invalid_id" }, { status: 400 });
+  }
+
+  try {
+    const booking = await prisma.booking.findUnique({ where: { id: bookingId } });
+    if (!booking) {
+      return Response.json({ error: "not_found" }, { status: 404 });
+    }
+    return Response.json(booking);
+  } catch (error) {
+    console.error("Failed to fetch booking:", error);
+    return Response.json({ error: "Failed to fetch booking" }, { status: 500 });
+  }
+}
+
 /**
  * Admin only: change a booking's status. Only the moves in `BOOKING_TRANSITIONS`
  * are allowed (pending → confirmed / cancelled, confirmed → cancelled), so a

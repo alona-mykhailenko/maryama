@@ -1,15 +1,15 @@
 'use client';
 
-import { Box, VStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
+import { BookingStatus } from '@/generated/prisma/enums';
 import { CalendarLegend } from '@/features/admin/calendar/components/calendar-legend';
 import { CalendarToolbar } from '@/features/admin/calendar/components/calendar-toolbar';
 import { MonthView } from '@/features/admin/calendar/components/month-view';
 import type { CalendarView } from '@/features/admin/calendar/types';
 import { WeekView } from '@/features/admin/calendar/components/week-view';
-import { PageHeader } from '@/components/admin/layout/page-header';
-import ADMIN from '@/theme/admin-tokens';
+import { PageLayout } from '@/components/admin/layout/page-layout';
 import { QueryState } from '@/components/admin/ui/query-state';
 import {
   addDays,
@@ -28,6 +28,12 @@ export default function CalendarPage() {
 
   const rooms = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
   const bookings = useQuery({ queryKey: bookingsQueryKey, queryFn: getBookings });
+
+  // Cancelled bookings free their nights, so the calendar leaves them out.
+  const activeBookings = useMemo(
+    () => bookings.data?.filter((booking) => booking.status !== BookingStatus.CANCELLED),
+    [bookings.data],
+  );
 
   const weekStart = useMemo(() => startOfWeek(anchor), [anchor]);
   const month = useMemo(() => startOfMonth(anchor), [anchor]);
@@ -52,9 +58,9 @@ export default function CalendarPage() {
   const isError = rooms.isError || bookings.isError;
 
   return (
-    <>
-      <PageHeader heading="Calendar" />
-      <VStack align="stretch" gap="0" pb="40px">
+    <PageLayout
+      heading="Calendar"
+      toolbar={
         <CalendarToolbar
           rangeLabel={rangeLabel}
           rangeNote={rangeNote}
@@ -63,20 +69,20 @@ export default function CalendarPage() {
           onPrev={handlePrev}
           onNext={handleNext}
         />
+      }
+    >
+      <QueryState isLoading={isLoading} isError={isError} />
 
-        <QueryState isLoading={isLoading} isError={isError} />
-
-        {rooms.data && bookings.data && (
-          <Box px={ADMIN.gutter} pt="24px">
-            {view === 'week' ? (
-              <WeekView weekStart={weekStart} rooms={rooms.data} bookings={bookings.data} />
-            ) : (
-              <MonthView month={month} rooms={rooms.data} bookings={bookings.data} />
-            )}
-            <CalendarLegend />
-          </Box>
-        )}
-      </VStack>
-    </>
+      {rooms.data && activeBookings && (
+        <Box>
+          {view === 'week' ? (
+            <WeekView weekStart={weekStart} rooms={rooms.data} bookings={activeBookings} />
+          ) : (
+            <MonthView month={month} rooms={rooms.data} bookings={activeBookings} />
+          )}
+          <CalendarLegend />
+        </Box>
+      )}
+    </PageLayout>
   );
 }

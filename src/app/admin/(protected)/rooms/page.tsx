@@ -1,13 +1,13 @@
 'use client';
 
-import { HStack, VStack } from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
 import COLORS from '@/theme/colors';
 import FONTS from '@/theme/fonts';
 import { ChevronRightIcon } from '@/components/admin/icons/chevron-right';
-import { PageHeader } from '@/components/admin/layout/page-header';
+import { PageLayout } from '@/components/admin/layout/page-layout';
 import { DataTable } from '@/components/admin/ui/data-table';
 import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
@@ -62,20 +62,17 @@ export default function RoomsPage() {
   const { data, isLoading, isError } = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
 
   return (
-    <>
-      <PageHeader heading="Rooms" />
-      <VStack align="stretch" gap="0">
-        <QueryState isLoading={isLoading} isError={isError} />
-        {data && (
-          <DataTable
-            columns={COLUMNS}
-            data={data}
-            getRowId={getRoomRowId}
-            onRowClick={handleRowClick}
-            emptyMessage="No rooms yet."
-          />
-        )}
-      </VStack>
-    </>
+    <PageLayout heading="Rooms">
+      <QueryState isLoading={isLoading} isError={isError} />
+      {data && (
+        <DataTable
+          columns={COLUMNS}
+          data={data}
+          getRowId={getRoomRowId}
+          onRowClick={handleRowClick}
+          emptyMessage="No rooms yet."
+        />
+      )}
+    </PageLayout>
   );
 }

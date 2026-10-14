@@ -1,23 +1,15 @@
 import { HStack } from '@chakra-ui/react';
-import COLORS from '@/theme/colors';
-import ADMIN from '@/theme/admin-tokens';
 import type { SegmentedTabsProps } from './props';
 import { TabOption } from './tab-option';
 
-/** Underlined filter tabs that sit under the page header. */
+/** Underlined filter tabs, meant for the `PageLayout` toolbar. */
 export const SegmentedTabs = <T extends string>({
   options,
   value,
   onChange,
 }: SegmentedTabsProps<T>) => {
   return (
-    <HStack
-      gap="6px"
-      px={ADMIN.gutter}
-      borderBottom="1px solid"
-      borderColor={COLORS.Border.Default}
-      overflowX="auto"
-    >
+    <HStack gap="6px" overflowX="auto">
       {options.map((option) => (
         <TabOption
           key={option.value}

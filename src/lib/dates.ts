@@ -58,6 +58,27 @@ export function formatShortDate(value: string | Date): string {
   return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 }
 
+/** Date-only value as "Mon 12 Oct 2026". */
+export function formatLongDate(value: string): string {
+  return parseDay(value).toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+/** Timestamp (e.g. `createdAt`) as "12 Oct 2026, 14:05" in local time. */
+export function formatDateTime(value: string): string {
+  return new Date(value).toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
 export function isoWeekNumber(date: Date): number {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   const dayNum = d.getUTCDay() || 7;
