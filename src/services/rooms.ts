@@ -1,3 +1,4 @@
+import type { RoomPriceUpdate } from "@/features/rooms/schema";
 import type { Room, RoomImage } from "@/features/rooms/types";
 
 export const roomsQueryKey = ["rooms"] as const;
@@ -29,6 +30,22 @@ export async function checkAvailability(checkIn: string, checkOut: string): Prom
   return roomIds;
 }
 
+/** Changes a room's nightly price (admin only). */
+export async function updateRoomPrice({
+  roomId,
+  pricePerNight,
+}: { roomId: number } & RoomPriceUpdate): Promise<Room> {
+  const response = await fetch(`/api/rooms/${roomId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ pricePerNight }),
+  });
+  if (!response.ok) {
+    const error = await response.json().catch(() => null);
+    throw new Error(error?.error ?? "update_failed");
+  }
+  return response.json();
+}
 
 /** Uploads photos to a room (admin only). */
 export async function uploadRoomImages({

@@ -25,12 +25,12 @@ export const TextInput = ({
       <Input
         variant="flushed"
         color={COLORS.Text.Fg}
-        borderBottomColor={COLORS.Border.Brand}
         {...FONTS.T1.T14px.Light}
         css={{
           '--focus-color': COLORS.Text.Fg,
           '--error-color': COLORS.Border.Error,
         }}
+        _focusVisible={{ boxShadow: 'none', _invalid: { boxShadow: 'none' } }}
         {...rest}
       />
       <Field.ErrorText m="0">

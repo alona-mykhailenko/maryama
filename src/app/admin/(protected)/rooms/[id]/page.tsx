@@ -12,6 +12,7 @@ import { PageLayout } from '@/components/admin/layout/page-layout';
 import { ImageUploadDialog } from '@/features/admin/rooms/components/image-upload-dialog';
 import { RoomImageGallery } from '@/features/admin/rooms/components/room-image-gallery';
 import { RoomPriceCard } from '@/features/admin/rooms/components/room-price-card';
+import { RoomPriceDialog } from '@/features/admin/rooms/components/room-price-dialog';
 import { RoomUpcomingBookings } from '@/features/admin/rooms/components/room-upcoming-bookings';
 import ADMIN from '@/theme/admin-tokens';
 import { BackButton } from '@/components/admin/ui/back-button';
@@ -20,7 +21,14 @@ import { QueryState } from '@/components/admin/ui/query-state';
 import { Text } from '@/components/ui/text';
 import { parseDay, startOfDay } from '@/lib/dates';
 import { bookingsQueryKey, getBookings } from '@/services/bookings';
-import { deleteRoomImage, getRoom, roomQueryKey, roomsQueryKey, uploadRoomImages } from '@/services/rooms';
+import {
+  deleteRoomImage,
+  getRoom,
+  roomQueryKey,
+  roomsQueryKey,
+  updateRoomPrice,
+  uploadRoomImages,
+} from '@/services/rooms';
 import type { RoomImage } from '@/features/rooms/types';
 
 const UPCOMING_LIMIT = 5;
@@ -28,6 +36,10 @@ const UPCOMING_LIMIT = 5;
 const UPLOAD_ERRORS: Record<string, string> = {
   invalid_type: 'Only JPG, PNG or WebP photos can be uploaded.',
   file_too_large: 'One of the photos is too large.',
+};
+
+const PRICE_ERRORS: Record<string, string> = {
+  invalid_price: 'Enter a whole number of euros between 1 and 10,000.',
 };
 
 export default function RoomDetailPage() {
@@ -63,6 +75,23 @@ export default function RoomDetailPage() {
       setImageToDelete(null);
     },
   });
+
+  const [priceOpen, setPriceOpen] = useState(false);
+  const updatePrice = useMutation({
+    mutationFn: (pricePerNight: number) => updateRoomPrice({ roomId, pricePerNight }),
+    onSuccess: async (updated) => {
+      queryClient.setQueryData(roomQueryKey(roomId), updated);
+      await queryClient.invalidateQueries({ queryKey: roomsQueryKey, exact: true });
+      setPriceOpen(false);
+    },
+  });
+
+  const handleEditPrice = () => {
+    updatePrice.reset();
+    setPriceOpen(true);
+  };
+
+  const handleSavePrice = (pricePerNight: number) => updatePrice.mutate(pricePerNight);
 
   const handleAddImages = () => {
     upload.reset();
@@ -164,7 +193,7 @@ export default function RoomDetailPage() {
           </VStack>
 
           <VStack align="stretch" gap="18px" minW="0">
-            <RoomPriceCard pricePerNight={room.data.pricePerNight} />
+            <RoomPriceCard pricePerNight={room.data.pricePerNight} onEdit={handleEditPrice} />
             <RoomUpcomingBookings bookings={upcoming} />
           </VStack>
         </Grid>
@@ -181,6 +210,21 @@ export default function RoomDetailPage() {
             : null
         }
       />
+
+      {room.data && (
+        <RoomPriceDialog
+          open={priceOpen}
+          onOpenChange={setPriceOpen}
+          pricePerNight={room.data.pricePerNight}
+          onSave={handleSavePrice}
+          loading={updatePrice.isPending}
+          error={
+            updatePrice.error
+              ? (PRICE_ERRORS[updatePrice.error.message] ?? 'Could not save the price. Please try again.')
+              : null
+          }
+        />
+      )}
 
       <ConfirmDialog
         open={imageToDelete !== null}
