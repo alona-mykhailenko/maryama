@@ -13,6 +13,8 @@ export interface Booking {
   guestPhone: string | null;
   guests: number;
   message: string | null;
+  pricePerNight: number;
+  totalPrice: number;
   status: BookingStatus;
   createdAt: string;
 }

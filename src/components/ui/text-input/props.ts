@@ -1,9 +1,9 @@
 import type { InputProps } from '@chakra-ui/react';
 
 export interface TextInputProps extends InputProps {
-  /** Small tracked uppercase label above the field. */
-  label: string;
-  /** Validation message shown under the field when `invalid` is set. */
+  label?: string;
   error?: string;
   invalid?: boolean;
+  /** Draws a finer, softer hairline (0.5px brand tone) instead of the default ink underline. */
+  thinUnderline?: boolean;
 }
