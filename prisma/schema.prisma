@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -11,7 +11,7 @@ model Room {
   id            Int         @id @default(autoincrement())
   name          String
   description   String
-  pricePerNight Int         // whole euros
+  pricePerNight Int // whole euros
   capacity      Int
   createdAt     DateTime    @default(now())
   images        RoomImage[]
@@ -33,17 +33,20 @@ enum BookingStatus {
 }
 
 model Booking {
-  id         Int           @id @default(autoincrement())
-  roomId     Int
-  room       Room          @relation(fields: [roomId], references: [id])
-  checkIn    DateTime      @db.Date
-  checkOut   DateTime      @db.Date
-  guestName  String
-  guestEmail String
-  guests     Int
-  message    String?
-  status     BookingStatus @default(PENDING)
-  createdAt  DateTime      @default(now())
+  id            Int           @id @default(autoincrement())
+  roomId        Int
+  room          Room          @relation(fields: [roomId], references: [id])
+  checkIn       DateTime      @db.Date
+  checkOut      DateTime      @db.Date
+  guestName     String
+  guestEmail    String
+  guestPhone    String? // null for bookings made before it was collected
+  guests        Int
+  message       String?
+  pricePerNight Int // whole euros, the room's rate when the booking was made
+  totalPrice    Int // whole euros, pricePerNight × nights
+  status        BookingStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
 
   @@index([roomId, checkIn, checkOut])
 }

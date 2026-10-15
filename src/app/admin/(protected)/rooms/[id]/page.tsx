@@ -1,0 +1,241 @@
+'use client';
+
+import { Grid, HStack, VStack } from '@chakra-ui/react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import { BookingStatus } from '@/generated/prisma/enums';
+import COLORS from '@/theme/colors';
+import FONTS from '@/theme/fonts';
+import { PencilIcon } from '@/components/admin/icons/pencil';
+import { PageLayout } from '@/components/admin/layout/page-layout';
+import { ImageUploadDialog } from '@/features/admin/rooms/components/image-upload-dialog';
+import { RoomImageGallery } from '@/features/admin/rooms/components/room-image-gallery';
+import { RoomPriceCard } from '@/features/admin/rooms/components/room-price-card';
+import { RoomPriceDialog } from '@/features/admin/rooms/components/room-price-dialog';
+import { RoomUpcomingBookings } from '@/features/admin/rooms/components/room-upcoming-bookings';
+import ADMIN from '@/theme/admin-tokens';
+import { BackButton } from '@/components/admin/ui/back-button';
+import { ConfirmDialog } from '@/components/admin/ui/confirm-dialog';
+import { QueryState } from '@/components/admin/ui/query-state';
+import { Text } from '@/components/ui/text';
+import { parseDay, startOfDay } from '@/lib/dates';
+import { bookingsQueryKey, getBookings } from '@/services/bookings';
+import {
+  deleteRoomImage,
+  getRoom,
+  roomQueryKey,
+  roomsQueryKey,
+  updateRoomPrice,
+  uploadRoomImages,
+} from '@/services/rooms';
+import type { RoomImage } from '@/features/rooms/types';
+
+const UPCOMING_LIMIT = 5;
+
+const UPLOAD_ERRORS: Record<string, string> = {
+  invalid_type: 'Only JPG, PNG or WebP photos can be uploaded.',
+  file_too_large: 'One of the photos is too large.',
+};
+
+const PRICE_ERRORS: Record<string, string> = {
+  invalid_price: 'Enter a whole number of euros between 1 and 10,000.',
+};
+
+export default function RoomDetailPage() {
+  const params = useParams<{ id: string }>();
+  const roomId = Number(params.id);
+
+  const room = useQuery({ queryKey: roomQueryKey(roomId), queryFn: () => getRoom(roomId) });
+  const bookings = useQuery({ queryKey: bookingsQueryKey, queryFn: getBookings });
+
+  const queryClient = useQueryClient();
+  const refreshRoom = () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: roomQueryKey(roomId) }),
+      queryClient.invalidateQueries({ queryKey: roomsQueryKey, exact: true }),
+    ]);
+
+  const [uploadOpen, setUploadOpen] = useState(false);
+  const upload = useMutation({
+    mutationFn: (files: File[]) => uploadRoomImages({ roomId, files }),
+    onSuccess: async () => {
+      await refreshRoom();
+      setUploadOpen(false);
+    },
+    // A partial failure may still have saved some photos.
+    onError: refreshRoom,
+  });
+
+  const [imageToDelete, setImageToDelete] = useState<RoomImage | null>(null);
+  const remove = useMutation({
+    mutationFn: (image: RoomImage) => deleteRoomImage({ roomId, imageId: image.id }),
+    onSuccess: async () => {
+      await refreshRoom();
+      setImageToDelete(null);
+    },
+  });
+
+  const [priceOpen, setPriceOpen] = useState(false);
+  const updatePrice = useMutation({
+    mutationFn: (pricePerNight: number) => updateRoomPrice({ roomId, pricePerNight }),
+    onSuccess: async (updated) => {
+      queryClient.setQueryData(roomQueryKey(roomId), updated);
+      await queryClient.invalidateQueries({ queryKey: roomsQueryKey, exact: true });
+      setPriceOpen(false);
+    },
+  });
+
+  const handleEditPrice = () => {
+    updatePrice.reset();
+    setPriceOpen(true);
+  };
+
+  const handleSavePrice = (pricePerNight: number) => updatePrice.mutate(pricePerNight);
+
+  const handleAddImages = () => {
+    upload.reset();
+    setUploadOpen(true);
+  };
+
+  const handleDeleteImage = (image: RoomImage) => {
+    remove.reset();
+    setImageToDelete(image);
+  };
+
+  const handleUpload = (files: File[]) => upload.mutate(files);
+
+  const handleConfirmOpenChange = (open: boolean) => {
+    if (!open) setImageToDelete(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (imageToDelete) remove.mutate(imageToDelete);
+  };
+
+  const upcoming = useMemo(() => {
+    const today = startOfDay(new Date());
+    return (bookings.data ?? [])
+      .filter(
+        (b) =>
+          b.roomId === roomId &&
+          b.status !== BookingStatus.CANCELLED &&
+          parseDay(b.checkOut) >= today,
+      )
+      .sort((a, b) => parseDay(a.checkIn).getTime() - parseDay(b.checkIn).getTime())
+      .slice(0, UPCOMING_LIMIT);
+  }, [bookings.data, roomId]);
+
+  return (
+    <PageLayout
+      heading={room.data ? `${room.data.name}` : 'Rooms'}
+      toolbar={
+        <HStack justify="space-between" gap="16px" py="14px" flexWrap="wrap">
+          <BackButton />
+          <HStack
+            as="button"
+            title="Editing coming soon"
+            gap="8px"
+            px="15px"
+            py="9px"
+            borderRadius={ADMIN.pill}
+            bg={COLORS.Bg.Inverted}
+            color={COLORS.Text.FgContrast}
+            cursor="not-allowed"
+            opacity={0.6}
+          >
+            <PencilIcon size={16} />
+            <Text font={FONTS.T2.T14px.Medium} color="inherit">
+              Modify room details
+            </Text>
+          </HStack>
+        </HStack>
+      }
+    >
+      <QueryState
+        isLoading={room.isLoading || bookings.isLoading}
+        isError={room.isError || bookings.isError}
+      />
+
+      {room.data && bookings.data && (
+        <Grid
+          templateColumns={{ base: '1fr', lg: 'minmax(0, 1.55fr) minmax(260px, 1fr)' }}
+          gap="26px"
+          alignItems="start"
+        >
+          <VStack align="stretch" gap="12px" minW="0">
+            <RoomImageGallery
+              images={room.data.images}
+              roomName={room.data.name}
+              onAdd={handleAddImages}
+              onDelete={handleDeleteImage}
+            />
+
+            <VStack align="stretch" gap="3px" mt="14px">
+              <Text as="h1" font={FONTS.T2.T24px.Medium} letterSpacing="-0.015em">
+                {room.data.name}
+              </Text>
+              <Text font={FONTS.T2.T14px.Regular} color={COLORS.Text.FgMuted}>
+                Sleeps {room.data.capacity}
+              </Text>
+            </VStack>
+
+            {room.data.description && (
+              <Text
+                font={FONTS.T2.T14px.Regular}
+                color={COLORS.Text.FgSecondary}
+                maxW="62ch"
+                mt="10px"
+              >
+                {room.data.description}
+              </Text>
+            )}
+          </VStack>
+
+          <VStack align="stretch" gap="18px" minW="0">
+            <RoomPriceCard pricePerNight={room.data.pricePerNight} onEdit={handleEditPrice} />
+            <RoomUpcomingBookings bookings={upcoming} />
+          </VStack>
+        </Grid>
+      )}
+
+      <ImageUploadDialog
+        open={uploadOpen}
+        onOpenChange={setUploadOpen}
+        onUpload={handleUpload}
+        loading={upload.isPending}
+        error={
+          upload.error
+            ? (UPLOAD_ERRORS[upload.error.message] ?? 'Upload failed. Please try again.')
+            : null
+        }
+      />
+
+      {room.data && (
+        <RoomPriceDialog
+          open={priceOpen}
+          onOpenChange={setPriceOpen}
+          pricePerNight={room.data.pricePerNight}
+          onSave={handleSavePrice}
+          loading={updatePrice.isPending}
+          error={
+            updatePrice.error
+              ? (PRICE_ERRORS[updatePrice.error.message] ?? 'Could not save the price. Please try again.')
+              : null
+          }
+        />
+      )}
+
+      <ConfirmDialog
+        open={imageToDelete !== null}
+        onOpenChange={handleConfirmOpenChange}
+        title="Delete photo?"
+        description="This photo will be removed from the room and from the website. This can't be undone."
+        confirmLabel="Delete photo"
+        onConfirm={handleConfirmDelete}
+        loading={remove.isPending}
+        error={remove.isError ? 'Could not delete the photo. Please try again.' : null}
+      />
+    </PageLayout>
+  );
+}
