@@ -7,12 +7,14 @@ import type { TextInputProps } from './props';
 /**
  * Labelled text field in the Maryama style: tracked uppercase label, a single
  * ink hairline underneath (Chakra `flushed`) and a clay error message. Extra
- * props are forwarded to the Chakra `Input`.
+ * props are forwarded to the Chakra `Input`. `thinUnderline` swaps the hairline
+ * for a finer 0.5px brand-tone line.
  */
 export const TextInput = ({
   label,
   error,
   invalid = false,
+  thinUnderline = false,
   ...rest
 }: TextInputProps) => {
   return (
@@ -31,6 +33,12 @@ export const TextInput = ({
           '--error-color': COLORS.Border.Error,
         }}
         _focusVisible={{ boxShadow: 'none', _invalid: { boxShadow: 'none' } }}
+        {...(thinUnderline && {
+          borderBottomWidth: '0.5px',
+          borderBottomColor: COLORS.Border.Emphasized,
+          _focus: { borderBottomColor: COLORS.Text.Fg },
+          _invalid: { borderBottomColor: COLORS.Border.Error },
+        })}
         {...rest}
       />
       <Field.ErrorText m="0">

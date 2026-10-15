@@ -190,6 +190,7 @@ export const BookingForm = ({
           <SectionLabel>{BOOKING.detailsLabel}</SectionLabel>
           <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="28px 40px">
             <TextInput
+              thinUnderline
               label={BOOKING.nameLabel}
               name="guestName"
               autoComplete="name"
@@ -200,6 +201,7 @@ export const BookingForm = ({
               error={formik.errors.guestName}
             />
             <TextInput
+              thinUnderline
               label={BOOKING.emailLabel}
               name="guestEmail"
               type="email"
@@ -211,6 +213,7 @@ export const BookingForm = ({
               error={formik.errors.guestEmail}
             />
             <TextInput
+              thinUnderline
               label={BOOKING.phoneLabel}
               name="guestPhone"
               type="tel"
@@ -223,6 +226,7 @@ export const BookingForm = ({
             />
           </Grid>
           <TextArea
+            thinUnderline
             label={BOOKING.messageLabel}
             name="message"
             placeholder={BOOKING.messagePlaceholder}

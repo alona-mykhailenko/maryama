@@ -7,9 +7,16 @@ import type { TextAreaProps } from './props';
 /**
  * Multi-line twin of `TextInput`: tracked uppercase label, a single hairline
  * underneath (Chakra `flushed`) and a clay error message. Grows with its
- * content. Extra props are forwarded to the Chakra `Textarea`.
+ * content. Extra props are forwarded to the Chakra `Textarea`. `thinUnderline`
+ * swaps the hairline for a finer 0.5px line.
  */
-export const TextArea = ({ label, error, invalid = false, ...rest }: TextAreaProps) => {
+export const TextArea = ({
+  label,
+  error,
+  invalid = false,
+  thinUnderline = false,
+  ...rest
+}: TextAreaProps) => {
   return (
     <Field.Root invalid={invalid} gap="10px">
       <Field.Label m="0">
@@ -20,6 +27,7 @@ export const TextArea = ({ label, error, invalid = false, ...rest }: TextAreaPro
       <Textarea
         variant="flushed"
         autoresize
+        rows={1}
         minH="44px"
         color={COLORS.Text.Fg}
         borderBottomColor={COLORS.Border.Brand}
@@ -29,6 +37,13 @@ export const TextArea = ({ label, error, invalid = false, ...rest }: TextAreaPro
           '--focus-color': COLORS.Text.Fg,
           '--error-color': COLORS.Border.Error,
         }}
+        {...(thinUnderline && {
+          borderBottomWidth: '0.5px',
+          borderBottomColor: COLORS.Border.Emphasized,
+          _focus: { borderBottomColor: COLORS.Text.Fg },
+          _focusVisible: { boxShadow: 'none', _invalid: { boxShadow: 'none' } },
+          _invalid: { borderBottomColor: COLORS.Border.Error },
+        })}
         {...rest}
       />
       <Field.ErrorText m="0">
