@@ -18,3 +18,13 @@ export interface Booking {
   status: BookingStatus;
   createdAt: string;
 }
+
+/** One page of bookings, as returned by `GET /api/bookings?page=…`. */
+export interface BookingsPage {
+  items: Booking[];
+  /** Bookings matching the filter, across every page. */
+  total: number;
+  page: number;
+  pageSize: number;
+  pageCount: number;
+}

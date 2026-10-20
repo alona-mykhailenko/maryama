@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { BookingStatus } from "@/generated/prisma/enums";
 
 const isoDay = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Choose your dates");
 
@@ -27,3 +28,17 @@ export const bookingRequestSchema = z.object({
 });
 
 export type BookingRequest = z.infer<typeof bookingRequestSchema>;
+
+export const BOOKINGS_MAX_PAGE_SIZE = 100;
+
+/**
+ * Query string of a paginated `GET /api/bookings?page=…` (admin). `page` is
+ * 1-based; `status` narrows the list to one status.
+ */
+export const bookingsPageQuerySchema = z.object({
+  page: z.coerce.number().int().min(1),
+  pageSize: z.coerce.number().int().min(1).max(BOOKINGS_MAX_PAGE_SIZE).default(20),
+  status: z.enum(BookingStatus).optional(),
+});
+
+export type BookingsPageQuery = z.input<typeof bookingsPageQuerySchema>;

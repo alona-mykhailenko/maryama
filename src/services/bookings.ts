@@ -1,11 +1,29 @@
-import type { BookingRequest } from "@/features/bookings/schema";
-import type { Booking, BookingStatus } from "@/features/bookings/types";
+import type { BookingRequest, BookingsPageQuery } from "@/features/bookings/schema";
+import type { Booking, BookingsPage, BookingStatus } from "@/features/bookings/types";
 
 export const bookingsQueryKey = ["bookings"] as const;
 
 /** Every booking (admin only). */
 export async function getBookings(): Promise<Booking[]> {
   const response = await fetch("/api/bookings");
+  if (!response.ok) throw new Error("bookings_unavailable");
+  return response.json();
+}
+
+/** Under `bookingsQueryKey`, so invalidating the list refreshes every page too. */
+export const bookingsPageQueryKey = (query: BookingsPageQuery) =>
+  ["bookings", "page", query] as const;
+
+/** One page of bookings, optionally filtered by status (admin only). */
+export async function getBookingsPage({
+  page,
+  pageSize,
+  status,
+}: BookingsPageQuery): Promise<BookingsPage> {
+  const params = new URLSearchParams({ page: String(page) });
+  if (pageSize !== undefined) params.set("pageSize", String(pageSize));
+  if (status) params.set("status", status);
+  const response = await fetch(`/api/bookings?${params}`);
   if (!response.ok) throw new Error("bookings_unavailable");
   return response.json();
 }

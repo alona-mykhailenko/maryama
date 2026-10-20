@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -18,7 +18,7 @@ import { StatusBadge } from '@/components/admin/ui/status-badge';
 import { Text } from '@/components/ui/text';
 import { bookingStatusTone } from '@/features/admin/bookings/status';
 import { formatShortDate } from '@/lib/dates';
-import { bookingsQueryKey, getBookings } from '@/services/bookings';
+import { bookingsPageQueryKey, getBookingsPage } from '@/services/bookings';
 import { getRooms, roomsQueryKey } from '@/services/rooms';
 import type { Booking } from '@/features/bookings/types';
 
@@ -42,7 +42,17 @@ export default function BookingsPage() {
   const [page, setPage] = useState(1);
 
   const router = useRouter();
-  const bookings = useQuery({ queryKey: bookingsQueryKey, queryFn: getBookings });
+  const query = {
+    page,
+    pageSize: PAGE_SIZE,
+    status: statusFilter === 'all' ? undefined : statusFilter,
+  };
+  const bookings = useQuery({
+    queryKey: bookingsPageQueryKey(query),
+    queryFn: () => getBookingsPage(query),
+    // Keep the current rows on screen while the next page loads.
+    placeholderData: keepPreviousData,
+  });
   const rooms = useQuery({ queryKey: roomsQueryKey, queryFn: getRooms });
 
   const roomsById = useMemo(
@@ -50,14 +60,12 @@ export default function BookingsPage() {
     [rooms.data],
   );
 
-  const filtered = useMemo(() => {
-    const data = bookings.data ?? [];
-    return statusFilter === 'all' ? data : data.filter((b) => b.status === statusFilter);
-  }, [bookings.data, statusFilter]);
+  const total = bookings.data?.total ?? 0;
+  const pageCount = bookings.data?.pageCount ?? 1;
+  const currentPage = bookings.data?.page ?? page;
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const currentPage = Math.min(page, pageCount);
-  const paged = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  // A status change elsewhere can shrink the list below the current page.
+  if (page > pageCount) setPage(pageCount);
 
   const columns = useMemo(
     () => [
@@ -128,8 +136,8 @@ export default function BookingsPage() {
     setPage(1);
   };
 
-  const rangeFrom = filtered.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
-  const rangeTo = Math.min(currentPage * PAGE_SIZE, filtered.length);
+  const rangeFrom = total === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const rangeTo = Math.min(currentPage * PAGE_SIZE, total);
 
   return (
     <PageLayout
@@ -151,7 +159,7 @@ export default function BookingsPage() {
         <>
           <DataTable
             columns={columns}
-            data={paged}
+            data={bookings.data.items}
             getRowId={getBookingRowId}
             onRowClick={handleRowClick}
             emptyMessage="No bookings in this view."
@@ -161,9 +169,7 @@ export default function BookingsPage() {
             pageCount={pageCount}
             onPageChange={setPage}
             rangeLabel={
-              filtered.length === 0
-                ? 'No bookings'
-                : `Showing ${rangeFrom}–${rangeTo} of ${filtered.length}`
+              total === 0 ? 'No bookings' : `Showing ${rangeFrom}–${rangeTo} of ${total}`
             }
           />
         </>

@@ -2,25 +2,60 @@ import { BookingStatus, Prisma } from "@/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import { getAdmin } from "@/lib/auth";
 import { MAX_STAY_NIGHTS } from "@/lib/dates";
-import { bookingRequestSchema } from "@/features/bookings/schema";
+import { bookingRequestSchema, bookingsPageQuerySchema } from "@/features/bookings/schema";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 /** `YYYY-MM-DD` as UTC midnight, the way `DATE` columns are stored. */
 const toUtcDay = (day: string) => new Date(`${day}T00:00:00.000Z`);
 
-/** Admin only: every booking, oldest check-in first. */
-export async function GET() {
+/**
+ * Admin only: bookings, oldest check-in first.
+ *
+ * Without `page` it returns every booking as an array (calendar, room page).
+ * With `?page=1&pageSize=20&status=PENDING` it returns one page as
+ * `{ items, total, page, pageSize, pageCount }`; an invalid query is a 400.
+ */
+export async function GET(request: Request) {
   if (!(await getAdmin())) {
     return Response.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  try {
-    const bookings = await prisma.booking.findMany({
-      orderBy: { checkIn: "asc" },
-    });
+  const searchParams = new URL(request.url).searchParams;
 
-    return Response.json(bookings);
+  try {
+    if (!searchParams.has("page")) {
+      const bookings = await prisma.booking.findMany({
+        orderBy: { checkIn: "asc" },
+      });
+      return Response.json(bookings);
+    }
+
+    const parsed = bookingsPageQuerySchema.safeParse(Object.fromEntries(searchParams));
+    if (!parsed.success) {
+      return Response.json({ error: "invalid_query" }, { status: 400 });
+    }
+
+    const { page, pageSize, status } = parsed.data;
+    const where = status ? { status } : {};
+    const [total, items] = await prisma.$transaction([
+      prisma.booking.count({ where }),
+      prisma.booking.findMany({
+        where,
+        // `id` breaks check-in ties so rows never shift between pages.
+        orderBy: [{ checkIn: "asc" }, { id: "asc" }],
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+    ]);
+
+    return Response.json({
+      items,
+      total,
+      page,
+      pageSize,
+      pageCount: Math.max(1, Math.ceil(total / pageSize)),
+    });
   } catch (error) {
     console.error("Failed to fetch bookings:", error);
     return Response.json({ error: "Failed to fetch bookings" }, { status: 500 });
