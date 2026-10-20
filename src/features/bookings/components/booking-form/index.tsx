@@ -7,6 +7,7 @@ import COLORS from "@/theme/colors";
 import FONTS from "@/theme/fonts";
 import { Text } from "@/components/ui/text";
 import { TextArea } from "@/components/ui/text-area";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { TextInput } from "@/components/ui/text-input";
 import { AVAILABILITY, BOOKING } from "@/config/content";
 import { SectionLabel } from "@/components/site/ui/section-label";
@@ -20,6 +21,9 @@ import { SubmitBookingButton } from "../submit-booking-button";
 import type { BookingFormProps } from "./props";
 
 const DEFAULT_GUESTS = 2;
+
+/** Where most guests call from, listed first in the phone country dropdown. */
+const PREFERRED_PHONE_COUNTRIES = ["ma", "fr", "es", "gb", "de", "nl", "be", "pt", "it", "ua", "cz"];
 
 interface BookingValues {
   checkIn: Date | null;
@@ -125,6 +129,10 @@ export const BookingForm = ({
     formik.setFieldValue("guests", value);
   };
 
+  const handlePhoneChange = (phone: string) => {
+    formik.setFieldValue("guestPhone", phone);
+  };
+
   return (
     <chakra.form onSubmit={formik.handleSubmit} noValidate>
       <VStack align="stretch" gap={LANDING.space.related}>
@@ -212,14 +220,12 @@ export const BookingForm = ({
               invalid={!!formik.errors.guestEmail && formik.touched.guestEmail}
               error={formik.errors.guestEmail}
             />
-            <TextInput
+            <PhoneInput
               thinUnderline
               label={BOOKING.phoneLabel}
               name="guestPhone"
-              type="tel"
-              autoComplete="tel"
-              value={formik.values.guestPhone}
-              onChange={formik.handleChange}
+              preferredCountries={PREFERRED_PHONE_COUNTRIES}
+              onChange={handlePhoneChange}
               onBlur={formik.handleBlur}
               invalid={!!formik.errors.guestPhone && formik.touched.guestPhone}
               error={formik.errors.guestPhone}
