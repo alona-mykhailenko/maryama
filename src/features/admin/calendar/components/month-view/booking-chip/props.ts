@@ -1,6 +1,6 @@
-import type { Booking } from '@/features/bookings/types';
+import type { CalendarBooking } from '@/features/bookings/types';
 
 export interface BookingChipProps {
-  booking: Booking;
+  booking: CalendarBooking;
   roomName: string;
 }

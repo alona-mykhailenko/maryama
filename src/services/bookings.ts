@@ -1,5 +1,10 @@
 import type { BookingRequest, BookingsPageQuery } from "@/features/bookings/schema";
-import type { Booking, BookingsPage, BookingStatus } from "@/features/bookings/types";
+import type {
+  Booking,
+  BookingsPage,
+  BookingStatus,
+  CalendarBooking,
+} from "@/features/bookings/types";
 
 export const bookingsQueryKey = ["bookings"] as const;
 
@@ -24,6 +29,27 @@ export async function getBookingsPage({
   if (pageSize !== undefined) params.set("pageSize", String(pageSize));
   if (status) params.set("status", status);
   const response = await fetch(`/api/bookings?${params}`);
+  if (!response.ok) throw new Error("bookings_unavailable");
+  return response.json();
+}
+
+/** Under `bookingsQueryKey`, so a status change refreshes the calendar too. */
+export const calendarBookingsQueryKey = (from: string, to: string) =>
+  ["bookings", "calendar", from, to] as const;
+
+/**
+ * Pending and confirmed bookings with a night in `[from, to)` (`YYYY-MM-DD`,
+ * `to` exclusive), for the calendar (admin only).
+ */
+export async function getCalendarBookings({
+  from,
+  to,
+}: {
+  from: string;
+  to: string;
+}): Promise<CalendarBooking[]> {
+  const params = new URLSearchParams({ from, to });
+  const response = await fetch(`/api/bookings/calendar?${params}`);
   if (!response.ok) throw new Error("bookings_unavailable");
   return response.json();
 }

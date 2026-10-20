@@ -28,3 +28,9 @@ export interface BookingsPage {
   pageSize: number;
   pageCount: number;
 }
+
+/** A booking as the calendar draws it, from `GET /api/bookings/calendar`. */
+export type CalendarBooking = Pick<
+  Booking,
+  "id" | "roomId" | "checkIn" | "checkOut" | "guestName" | "status"
+>;

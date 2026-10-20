@@ -32,7 +32,7 @@ npx prisma db seed     # Seed rooms (prisma/seed.ts)
 src/
 ├── app/                   # Routes ONLY: page.tsx, layout.tsx, route.ts (+ globals.css, favicon). No component files.
 │   ├── admin/             # Back office: login/ + (protected)/ (calendar, bookings, rooms, rooms/[id])
-│   ├── api/               # Route handlers (rooms, rooms/[id], rooms/[id]/images, rooms/availability, bookings, bookings/[id], auth/login, auth/logout)
+│   ├── api/               # Route handlers (rooms, rooms/[id], rooms/[id]/images, rooms/availability, bookings, bookings/calendar, bookings/[id], auth/login, auth/logout)
 │   ├── reserve/           # Availability search page
 │   ├── rooms/[id]/        # Public room page + book/ (booking request form)
 │   ├── layout.tsx         # Root layout, wraps everything in the Chakra + React Query providers
@@ -52,7 +52,7 @@ src/
 │   ├── rooms/             # Shared room logic only, no components: types (Room, RoomImage), image-rules
 │   └── admin/             # Admin-only domain UI (+ logic only admin uses)
 │       ├── bookings/      # components/ (booking-actions, guest-cell), status.ts (status → badge tone)
-│       ├── calendar/      # components/ (week/month views, toolbar, legend), types.ts (CalendarView)
+│       ├── calendar/      # components/ (week/month views, toolbar, legend), types.ts (CalendarView), use-calendar-bookings.ts
 │       └── rooms/         # components/ (image-upload-dialog, room-image-gallery, room-price-card, room-upcoming-bookings)
 ├── config/content.ts      # All site copy
 ├── theme/                 # colors (COLORS), fonts (Montserrat/Sora + FONTS), admin-tokens (ADMIN), landing-tokens (LANDING)
@@ -89,7 +89,7 @@ Each component lives in its own folder as `index.tsx` (+ `props.ts` when it has 
 - **Row Level Security**: every table in `public` (including `_prisma_migrations`) has RLS enabled with **no policies**, so the Supabase Data API (`/rest/v1`) returns nothing with the publishable key. The app only accesses data through Prisma, which connects as the `postgres` owner and bypasses RLS (don't `FORCE` it). Any new table needs `ALTER TABLE "<Table>" ENABLE ROW LEVEL SECURITY;` in its migration (`--create-only`, then add the line).
 - **Public routes** (no auth): `GET /api/rooms` and `GET /api/rooms/[id]` return rooms with their images ordered by `position`. Never return booking/guest data from public routes.
 - **Booking requests**: `POST /api/bookings` is public (the `/rooms/[id]/book` form). It validates with `bookingRequestSchema` (`src/features/bookings/schema.ts`, shared with the form), checks capacity and overlaps in a serializable transaction (409 `dates_unavailable`), always creates the booking as `PENDING`, and returns only `{ id, status }`.
-- **Admin routes**: `GET /api/bookings` (every booking as an array; with `?page=&pageSize=&status=` one page as `{ items, total, page, pageSize, pageCount }`), `PATCH /api/bookings/[id]` (status), `POST /api/rooms/[id]/images` (multipart `files`), `DELETE /api/rooms/[id]/images/[imageId]`. Every admin route handler checks `getAdmin()` and returns 401 otherwise — the proxy only guards `/admin/*` pages, not `/api`.
+- **Admin routes**: `GET /api/bookings` (every booking as an array; with `?page=&pageSize=&status=` one page as `{ items, total, page, pageSize, pageCount }`), `GET /api/bookings/calendar?from=&to=` (non-cancelled bookings overlapping the range, calendar fields only; the calendar fetches it per month via `useCalendarBookings`), `PATCH /api/bookings/[id]` (status), `POST /api/rooms/[id]/images` (multipart `files`), `DELETE /api/rooms/[id]/images/[imageId]`. Every admin route handler checks `getAdmin()` and returns 401 otherwise — the proxy only guards `/admin/*` pages, not `/api`.
 - **Room photos**: stored in the public Supabase Storage bucket `rooms-images` under `rooms/<roomId>/`, accessed only server-side through `createStorageClient()` (`src/lib/supabase/storage.ts`, secret key, call after `getAdmin()`). `RoomImage.url` holds the public URL; the object path is derived from it on delete. Accepted types/size limit live in `src/features/rooms/image-rules.ts`, shared by the API and the upload dialog.
 - **Client data**: fetchers + query keys live in `src/services/` (`rooms.ts`, `bookings.ts`, `auth.ts`), types in each feature's `types.ts`. They are called through React Query (`useQuery` / `useMutation`) from client pages and interactive client components. Server pages read through `src/services/rooms-server.ts` (`server-only`, public fields only). Enums come from `@/generated/prisma/enums` (safe to import client-side).
 - **Admin auth**: Supabase Auth via `@supabase/ssr`, httpOnly cookies only (there is no browser Supabase client). `src/proxy.ts` refreshes the session and redirects unauthenticated `/admin/*` requests to `/admin/login`. In server code use `requireAdmin()` from `@/lib/auth`.

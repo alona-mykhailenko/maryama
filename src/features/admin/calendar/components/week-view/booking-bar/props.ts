@@ -1,7 +1,7 @@
-import type { Booking } from '@/features/bookings/types';
+import type { CalendarBooking } from '@/features/bookings/types';
 
 export interface BookingBarProps {
-  booking: Booking;
+  booking: CalendarBooking;
   /** First day column (0–6) the bar covers this week. */
   startOffset: number;
   /** Number of day columns the bar spans. */
